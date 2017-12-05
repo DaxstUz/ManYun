@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:test="http://schemas.android.com/apk/res/com.ch.mhy"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#f3f3f3"
+              android:orientation="vertical">
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#000000"
+            android:gravity="center">
+
+<!--         <TextView -->
+<!--                 android:id="@+id/tv_title_search" -->
+<!--                 android:layout_width="wrap_content" -->
+<!--                 android:layout_height="wrap_content" -->
+<!--                 android:layout_gravity="center" -->
+<!--                 android:layout_marginLeft="25dp" -->
+<!--                 android:layout_marginRight="25dp" -->
+<!--                 android:background="@drawable/ch_search_title"/> -->
+         <LinearLayout
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                    android:id="@+id/ll_aboutmy_title_bg"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="5.6"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/ch_searchtitle_bg">
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/searchm"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        />
+
+                <TextView
+                        android:id="@+id/tv_title_search"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:background="#00ffffff"
+                        android:singleLine="true"
+                        android:maxLength="60"
+                        android:textColor="#FFFFFF"
+                        android:textCursorDrawable="@null"
+                        android:hint="请输入漫画名或作者"
+                        android:gravity="center_vertical"
+                        android:imeOptions="actionSearch"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:layout_weight="1"/>
+            </LinearLayout>
+            
+    </LinearLayout>
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#db332C"/>
+
+    <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:orientation="vertical">
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+            <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="热门搜索"
+                        android:textSize="18sp"/>
+
+                <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+
+                    <TextView
+                            android:id="@+id/tv_search_key1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"/>
+
+                    <TextView
+                            android:id="@+id/tv_search_key2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"/>
+
+                    <TextView
+                            android:id="@+id/tv_search_key3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:textColor="#db332c"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+
+                    <TextView
+                            android:id="@+id/tv_search_key4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"/>
+
+                    <TextView
+                            android:id="@+id/tv_search_key5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"/>
+
+                    <TextView
+                            android:id="@+id/tv_search_key6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:textColor="#db332c"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:background="#dbdbdb"/>
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2.5">
+
+            <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="猜你喜欢"
+                        android:layout_margin="5dp"
+                        android:textSize="18sp"/>
+
+                <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="10">
+
+                    <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                        <FrameLayout 
+                            android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                            >
+                        <com.ch.mhy.widget.ScaleLinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                test:aspectRatio="1.0"
+                                android:layout_margin="5dp"
+                                test:aspectRatioBase="-1">
+
+                            <ImageView
+                                    android:id="@+id/iv_search_like1"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:scaleType="matrix"
+                                    android:background="@drawable/ic_loading_small"
+                                    />
+                        </com.ch.mhy.widget.ScaleLinearLayout>
+<!--                          <ImageView -->
+<!--                                     android:id="@+id/iv_search_switch1" -->
+<!--                                     android:layout_width="wrap_content" -->
+<!--                                     android:layout_height="wrap_content" -->
+<!--                                     android:layout_gravity="center" -->
+<!--                                     android:visibility="gone" -->
+<!--                                     android:src="@drawable/imageloading"/> -->
+                        </FrameLayout>
+
+                        <TextView
+                                android:id="@+id/tv_like_show1"
+                                android:layout_width="fill_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center_horizontal"
+                                />
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                        <FrameLayout 
+                             android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="4"
+                            >
+                        <com.ch.mhy.widget.ScaleLinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                test:aspectRatio="1.0"
+                                android:layout_margin="5dp"
+                                test:aspectRatioBase="-1">
+
+                            <ImageView
+                                    android:id="@+id/iv_search_like2"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:scaleType="matrix"
+                                    android:background="@drawable/ic_loading_small"/>
+                        </com.ch.mhy.widget.ScaleLinearLayout>
+<!--                          <ImageView -->
+<!--                                     android:id="@+id/iv_search_switch2" -->
+<!--                                     android:layout_width="wrap_content" -->
+<!--                                     android:layout_height="wrap_content" -->
+<!--                                     android:layout_gravity="center" -->
+<!--                                     android:visibility="gone" -->
+<!--                                     android:src="@drawable/imageloading"/> -->
+                         </FrameLayout>
+
+                        <TextView
+                                android:id="@+id/tv_like_show2"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                />
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                        <com.ch.mhy.widget.ScaleLinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="4"
+                                test:aspectRatio="1.0"
+                                android:layout_margin="5dp"
+                                test:aspectRatioBase="-1">
+
+                            <ImageView
+                                    android:id="@+id/iv_search_like3"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:scaleType="matrix"
+                                    android:background="@drawable/ic_loading_small"/>
+                        </com.ch.mhy.widget.ScaleLinearLayout>
+
+                        <TextView
+                                android:id="@+id/tv_like_show3"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.2">
+
+                    <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                        <com.ch.mhy.widget.ScaleLinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                test:aspectRatio="1.0"
+                                test:aspectRatioBase="-1">
+
+                            <ImageView
+                                    android:id="@+id/iv_search_like4"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:scaleType="matrix"
+                                    android:background="@drawable/ic_loading_small"/>
+                        </com.ch.mhy.widget.ScaleLinearLayout>
+
+                        <TextView
+                                android:id="@+id/tv_like_show4"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                               />
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                        <com.ch.mhy.widget.ScaleLinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                test:aspectRatio="1.0"
+                                test:aspectRatioBase="-1">
+
+                            <ImageView
+                                    android:id="@+id/iv_search_like5"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:scaleType="matrix"
+                                    android:background="@drawable/ic_loading_small"/>
+                        </com.ch.mhy.widget.ScaleLinearLayout>
+
+                        <TextView
+                                android:id="@+id/tv_like_show5"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                />
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                        <com.ch.mhy.widget.ScaleLinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                test:aspectRatio="1.0"
+                                test:aspectRatioBase="-1">
+
+                            <ImageView
+                                    android:id="@+id/iv_search_like6"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:scaleType="matrix"
+                                    android:background="@drawable/ic_loading_small"/>
+
+                        </com.ch.mhy.widget.ScaleLinearLayout>
+
+                        <TextView
+                                android:id="@+id/tv_like_show6"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                               />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    
+    <LinearLayout 
+            android:id="@+id/ll_getnet"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:visibility="gone"
+            android:orientation="vertical"
+            >
+            <LinearLayout 
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.8"
+                android:gravity="center"
+                >
+                <TextView 
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nonet_info_show"
+                    android:textColor="#000000"
+                    />
+            </LinearLayout>
+            <LinearLayout 
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                >
+                <ImageView 
+                    android:id="@+id/btn_getnet"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                android:padding="10dp"
+                 android:src="@drawable/btn_getnetbg"
+                />
+            </LinearLayout>
+            
+            
+        </LinearLayout>
+	</FrameLayout>
+</LinearLayout>

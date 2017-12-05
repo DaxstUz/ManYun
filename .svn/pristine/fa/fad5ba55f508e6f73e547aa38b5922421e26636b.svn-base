@@ -1,0 +1,66 @@
+package com.ch.mhy.util;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.util.Log;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.Request.Method;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.ch.comm.resquest.AbsResponseData;
+
+/**
+ * 数据请求帮助类
+ * 
+ * @author xc.li
+ * @date 2015年7月7日
+ */
+public class RequestDataUtil {
+
+	/**
+	 * 数据请求
+	 * @param url 地址
+	 * @param param 请求参数
+	 * @param data 返回数据处理类
+	 */
+	public static void requestData(String url, JSONObject param, final AbsResponseData data) {
+		JsonObjectRequest joObjectRequest = new JsonObjectRequest(Method.POST, url, param,
+				new Listener<JSONObject>() {
+					@Override
+					public void onResponse(JSONObject response) {
+						try {
+							data.dataBusi(response.getJSONObject("object"));
+						} catch (JSONException e) {
+							e.printStackTrace();
+							Log.e("error", e.getMessage());
+						}
+					}
+				}, new ErrorListener() {
+					@Override
+					public void onErrorResponse(VolleyError error) {
+						Log.e("error", "网络服务请求失败了");
+					}
+				}) {
+			@Override
+			public Map<String, String> getHeaders() throws AuthFailureError {
+				Map<String, String> map = new HashMap<String, String>();
+				map.put("Content-Type", "application/json; charset=utf-8");
+				return map;
+			}
+		};
+
+		joObjectRequest.setRetryPolicy(new DefaultRetryPolicy(6000,
+				DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+				DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+		NetUtil.rqueue.add(joObjectRequest);
+	}
+}

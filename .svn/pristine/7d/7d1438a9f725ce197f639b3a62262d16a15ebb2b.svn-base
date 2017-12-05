@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tv_key"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#afa0a0"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+    
+<!--     <TextView -->
+<!--         android:id="@+id/tv_hua" -->
+<!--         android:layout_width="fill_parent" -->
+<!--         android:layout_height="match_parent" -->
+<!--         android:layout_marginRight="20dp" -->
+<!--         android:gravity="center_vertical|right" -->
+<!--         android:text="dd" -->
+<!--         android:textAppearance="?android:attr/textAppearanceSmall"/> -->
+
+</FrameLayout>

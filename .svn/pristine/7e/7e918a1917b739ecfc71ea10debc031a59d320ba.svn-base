@@ -1,0 +1,16 @@
+package com.ch.comm.resquest;
+
+import org.json.JSONObject;
+
+/**
+ * 数据处理接口
+ * @author xc.li
+ * @date 2015年7月7日
+ */
+public abstract class AbsResponseData {
+	/**
+	 * 数据业务处理
+	 * @param response data 返回的数据
+	 */
+	public abstract void dataBusi(JSONObject data);
+}

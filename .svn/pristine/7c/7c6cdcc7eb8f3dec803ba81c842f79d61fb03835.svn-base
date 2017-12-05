@@ -1,0 +1,59 @@
+package com.ch.mhy.fragment;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONObject;
+
+import com.ch.mhy.R;
+import com.ch.mhy.adapter.MsgAdapter;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
+
+/**
+ * 我发起的
+ * @author DaxstUz 2416738717
+ * 2015年10月17日
+ *
+ */
+public class IJoinFragment   extends Fragment{
+	
+	private ListView lv_isay;
+	
+	private List<JSONObject> list=new ArrayList<JSONObject>();
+	private MsgAdapter madapter;
+	
+	private View view;
+
+	    
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreateView(inflater, container, savedInstanceState);
+		
+		if(view!=null){
+			ViewGroup parent=(ViewGroup) view.getParent();
+			if(parent!=null){
+				parent.removeView(view);
+			}
+			return view;
+		}else{
+			view=inflater.inflate(R.layout.fragment_ijoin, null);
+		}
+		
+		init();
+		return view;
+	}
+
+	private void init() {
+		madapter=new MsgAdapter(getActivity(), list);
+		lv_isay=(ListView) view.findViewById(R.id.lv_isay);
+		lv_isay.setAdapter(madapter);
+	}
+}

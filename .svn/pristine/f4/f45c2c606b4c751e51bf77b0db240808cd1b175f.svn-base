@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.ch.mhy"
+          android:versionCode="5"
+          android:versionName="1.2.2">
+
+    <uses-sdk
+            android:minSdkVersion="14"
+            android:targetSdkVersion="17"/>
+
+    <!-- 访问互联网权限 根据需要添加 -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- SDCARD读写权限 根据需要添加 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!-- 网络状态检测权限  根据需要添加 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
+    <!--     改变屏幕亮度权限 -->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+ <!-- ###################声明SDK使用的相关权限###################### -->
+    <!-- QQ、QQ空间所需权限 -->
+<uses-permission android:name="android.permission.GET_TASKS" />
+<!-- <uses-permission android:name="android.permission.READ_LOGS" /> -->
+
+
+<!-- 获取包大小的权限 -->
+<uses-permission android:name="android.permission.GET_PACKAGE_SIZE"></uses-permission> 
+<!-- 清理缓存的权限 -->
+<uses-permission android:name="android.permission.CLEAR_APP_CACHE" />
+
+<!-- 横竖屏，不销毁重构权限 -->
+<uses-permission android:name="android.permission.CHANGE_CONFIGURATION"></uses-permission>  
+
+
+    <application
+            android:allowBackup="true"
+            android:icon="@drawable/my"
+            android:name="com.ch.mhy.application.MhyApplication"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme">
+        <activity
+                android:name="com.ch.mhy.GuideActivity"
+                android:label="@string/app_name"
+                android:screenOrientation="portrait"
+                android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+
+        <activity android:name="com.ch.mhy.MainActivity"
+                  android:screenOrientation="portrait"
+                ></activity>
+        
+        <!-- 我的 -->
+        <activity android:name=".activity.my.CollectActivity"
+                  android:screenOrientation="portrait"
+                ></activity>
+        <activity android:name=".activity.my.PersonReturn"
+                  android:screenOrientation="portrait"
+                />
+        <activity android:name=".activity.my.HistoryShow"
+                  android:screenOrientation="portrait"
+                  android:label="historyshow"/>
+        <activity android:name="com.ch.mhy.activity.my.CleanCash"
+                  android:screenOrientation="portrait"
+                  android:label="historyshow"/>
+        <activity android:name="com.ch.mhy.activity.my.DownLoadSet"
+                  android:screenOrientation="portrait"
+                  android:label="historyshow"/>
+        <activity android:name="com.ch.mhy.activity.my.DownShowActivity"
+                  android:screenOrientation="portrait"
+                  android:label="historyshow"/>
+        <activity android:name="com.ch.mhy.activity.my.GeneralsettingActivity"
+                  android:screenOrientation="portrait"
+                  android:label="historyshow"/>
+        <activity android:name="com.ch.mhy.activity.my.AboutUsActivity"
+                  android:screenOrientation="portrait"
+                  android:label="historyshow"/>
+        <activity android:name="com.ch.mhy.activity.my.ToWorkActivity"
+                  android:screenOrientation="portrait"
+                  android:label="historyshow"/>
+
+        <!--         阅读 -->
+        <activity android:name="com.ch.mhy.activity.cate.ShowBooksActivity"
+                  android:screenOrientation="portrait"
+                ></activity>
+        <activity android:name=".activity.book.ShowDetailActivity"
+                  android:screenOrientation="portrait"
+                ></activity>
+        <activity android:name=".activity.book.ReadingActivity"
+                  android:screenOrientation="portrait"
+                  android:configChanges="orientation|screenSize"  
+                ></activity>
+        <activity android:name="com.ch.mhy.activity.book.DownSelectActivity"
+                  android:screenOrientation="portrait"
+                ></activity>
+
+        <!--         搜索部分 -->
+        <activity android:name="com.ch.mhy.activity.serarch.SearchActivity"
+                  android:screenOrientation="portrait"
+                ></activity>
+        <activity android:name="com.ch.mhy.activity.serarch.ResultActivity"
+                  android:screenOrientation="portrait"
+                ></activity>
+        
+		<activity android:name="com.ch.mhy.activity.demo.DemoScrollContainListActivity"
+                  android:screenOrientation="portrait"
+                ></activity>
+
+		<activity android:name="com.ch.mhy.activity.msg.UpdateComicActivity"
+                  android:screenOrientation="portrait"></activity>
+
+        <service android:name="com.ch.mhy.service.DownComicService"></service>
+        <service android:name="com.ch.mhy.service.SaveImagService"></service>
+
+        <receiver android:name="com.ch.mhy.net.NetReceiver"></receiver>
+
+        <service android:name=".service.NetStateChangeService"></service>
+
+        <service android:name=".service.MessageService" android:stopWithTask="false"></service>
+        
+<!--         友盟 -->
+<!-- ###################注册SDK使用的Activity###################### -->
+        <!--分享编辑页-->
+        <activity
+            android:name="com.umeng.socialize.view.ShareActivity"
+            android:configChanges="orientation|keyboard"
+            android:launchMode="singleTask"
+            android:noHistory="true"
+            android:theme="@style/Theme.UMDialog"
+            android:windowSoftInputMode="stateVisible|adjustResize" >
+        </activity>
+
+        <!-- ############ QQ空间和QQ SSO授权的Activity注册 ############ -->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- 100424468，如果你使用的公用账号，则不需要修改；否则修改成你在QQ开放平台申请的 APP ID-->
+                <data android:scheme="1104686309" /> 
+            </intent-filter>
+        </activity>
+        <activity android:name="com.tencent.connect.common.AssistActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:screenOrientation="portrait">
+        </activity>
+        
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:exported="true" android:name=".wxapi.WXEntryActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        
+        
+        
+        
+        
+        <receiver
+            android:name="com.umeng.message.NotificationProxyBroadcastReceiver"
+			android:process=":push"
+            android:exported="false" >
+        </receiver>
+        <receiver
+            android:name="com.umeng.message.SystemReceiver"
+            android:process=":push" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.umeng.message.MessageReceiver"
+            android:process=":push" >
+            <intent-filter>
+                <action android:name="org.agoo.android.intent.action.RECEIVE" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.umeng.message.ElectionReceiver"
+            android:process=":push" >
+            <intent-filter>
+                <action android:name="org.agoo.android.intent.action.ELECTION_RESULT_V4" />
+                <category android:name="umeng" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.umeng.message.RegistrationReceiver"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.ch.mhy.intent.action.COMMAND" />
+            </intent-filter>
+        </receiver>
+		<receiver android:name="com.umeng.message.BootBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.umeng.message.UmengService"
+			android:label="PushService"
+            android:exported="true"
+            android:process=":push" >
+            <intent-filter>
+                <action android:name="com.ch.mhy.intent.action.START" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.ch.mhy.intent.action.COCKROACH" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="org.agoo.android.intent.action.PING_V4" />
+				<category android:name="umeng" />
+            </intent-filter>
+        </service>
+
+        <service android:name="com.umeng.message.UmengIntentService" 
+			android:process=":push" />
+			
+		<service 
+			android:name="com.umeng.message.UmengMessageIntentReceiverService"
+			android:process=":push" 
+			android:exported="true" >
+			<intent-filter>
+				<action android:name="org.android.agoo.client.MessageReceiverService" />
+			</intent-filter>
+			<intent-filter>
+				<action android:name="org.android.agoo.client.ElectionReceiverService" />
+			</intent-filter>
+		</service>
+        
+		<!-- 友盟自动更新下载服务 -->
+		<service
+		    android:name="com.umeng.update.net.DownloadingService"
+		    android:process=":DownloadingService" >
+		</service>
+		<!-- 友盟自动更新弹出提示框 -->
+		<activity 
+		    android:name="com.umeng.update.UpdateDialogActivity"
+		    android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+		</activity>
+		
+<!-- 		 55b5fa7b67e58e51ab0050a4-->
+         <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="557a9e6367e58e7d85003b80" > 
+        </meta-data>
+        <meta-data
+            android:name="UMENG_MESSAGE_SECRET"
+            android:value="675d3f5664f597e7e0014580ba37b346" >
+        </meta-data>
+<!--         <meta-data -->
+<!--             android:name="UMENG_CHANNEL" -->
+<!--             android:value="TaoBao" > -->
+<!--         </meta-data> -->
+<!--         <meta-data -->
+<!--             android:name="UMENG_CHANNEL" -->
+<!--             android:value="Umeng" > -->
+<!--         </meta-data> -->
+        <meta-data android:value="{qudao_tag}" android:name="UMENG_CHANNEL"></meta-data>
+        
+    </application>
+
+</manifest>

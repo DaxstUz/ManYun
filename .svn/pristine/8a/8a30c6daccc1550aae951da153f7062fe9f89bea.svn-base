@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <ListView
+            android:id="@+id/lv_book_collect"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:divider="@color/white"
+            ></ListView>
+    
+    <LinearLayout
+            android:id="@+id/ll_collect_operate"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="bottom"
+            android:visibility="gone" >
+
+            <Button
+                android:id="@+id/btn_selectall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/selectall" />
+
+            <Button
+                android:id="@+id/btn_delete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/delete" />
+        </LinearLayout>
+        
+</FrameLayout>

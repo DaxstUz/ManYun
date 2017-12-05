@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="textcolor">#db332c</color>
+    <color name="textcolor1">#FF3698</color>
+    <color name="textcolor2">#FFFFFF</color>
+    <color name="transparent">#FF0000</color>
+</resources>

@@ -1,0 +1,70 @@
+package com.ch.mhy.db;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteDatabase.CursorFactory;
+import android.database.sqlite.SQLiteOpenHelper;
+
+public class DBHelper extends SQLiteOpenHelper {
+
+    public DBHelper(Context context, String name, CursorFactory factory,
+                    int version) {
+        super(context, name, factory, version);
+    }
+
+    //数据库第一次被创建时onCreate会被调用
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+    	db.execSQL("CREATE TABLE IF NOT EXISTS comic" +
+    			"(id INTEGER PRIMARY KEY AUTOINCREMENT,mQid INTEGER,mId INTEGER,mName VARCHAR, mUrl TEXT,mNo INTEGER,CreateTime TEXT,mTitle VARCHAR,mDirector VARCHAR,mPic TEXT, mTotal INTEGER,mLianzai VARCHAR,rIndex INTEGER,maxNo INTEGER,mContent VARCHAR,mType1 INTEGER,mFenAll INTEGER,localUrl TEXT,port VARCHAR,ReadTime VARCHAR,minNo INTEGER,pmNo INTEGER,nmNo INTEGER,updateMessage VARCHAR)");
+    	db.execSQL("CREATE TABLE IF NOT EXISTS down" +
+    			"(id INTEGER PRIMARY KEY AUTOINCREMENT,mQid INTEGER,mId INTEGER,mName VARCHAR, mUrl TEXT,mNo INTEGER,CreateTime TEXT,mTitle VARCHAR,mDirector VARCHAR,mPic TEXT, mTotal INTEGER,mLianzai VARCHAR,rIndex INTEGER,maxNo INTEGER,isdown INTEGER,downs INTEGER,mType1 INTEGER,mContent VARCHAR,mFenAll INTEGER,localUrl TEXT,port VARCHAR,ReadTime VARCHAR,minNo INTEGER,pmNo INTEGER,nmNo INTEGER,updateMessage VARCHAR)");
+    }
+
+    //如果DATABASE_VERSION值被改为2,系统发现现有数据库版本不同,即会调用onUpgrade
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    	
+    	/*防止不同的版本号里面的数据结构不同，先删除原来的表结构*/
+    	db.execSQL("ALTER TABLE comic ADD COLUMN updateMessage VARCHAR"); 
+    	db.execSQL("ALTER TABLE down ADD COLUMN updateMessage VARCHAR"); 
+    	
+//    	/*
+//    	 * 创建一个临时表，把原来的数据保存起来，然后把原来的表删除
+//    	 */
+//    	db.execSQL("CREATE TABLE IF NOT EXISTS tempcomic" +
+//    			"(mQid INTEGER PRIMARY KEY AUTOINCREMENT,mId INTEGER,mName VARCHAR, mUrl TEXT,mNo INTEGER,CreateTime TEXT,mTitle VARCHAR,mDirector VARCHAR,mPic TEXT, mTotal INTEGER,mLianzai VARCHAR,rIndex INTEGER,maxNo INTEGER,mContent VARCHAR,mType1 INTEGER,mFenAll INTEGER,localUrl TEXT,port VARCHAR,ReadTime VARCHAR,minNo INTEGER )");
+//    	db.execSQL("CREATE TABLE IF NOT EXISTS tempdown" +
+//    			"(mQid INTEGER PRIMARY KEY AUTOINCREMENT,mId INTEGER,mName VARCHAR, mUrl TEXT,mNo INTEGER,CreateTime TEXT,mTitle VARCHAR,mDirector VARCHAR,mPic TEXT, mTotal INTEGER,mLianzai VARCHAR,rIndex INTEGER,maxNo INTEGER,isdown INTEGER,downs INTEGER,mType1 INTEGER,mContent VARCHAR,mFenAll INTEGER,localUrl TEXT,port VARCHAR,ReadTime VARCHAR,minNo INTEGER)");
+//    	db.execSQL("insert into tempcomic select * from comic"); 
+//    	db.execSQL("insert into tempdown select * from down");
+//    	db.execSQL("drop table comic"); 
+//    	db.execSQL("drop table down"); 
+//    	
+//    	
+//    	/*
+//    	 *创建新的表，把临时表里的数据保存到新建的表里面来，再删除临时表
+//    	 */
+//    	db.execSQL("CREATE TABLE IF NOT EXISTS comic" +
+//    			"(id INTEGER PRIMARY KEY AUTOINCREMENT,mQid INTEGER,mId INTEGER,mName VARCHAR, mUrl TEXT,mNo INTEGER,CreateTime TEXT,mTitle VARCHAR,mDirector VARCHAR,mPic TEXT, mTotal INTEGER,mLianzai VARCHAR,rIndex INTEGER,maxNo INTEGER,mContent VARCHAR,mType1 INTEGER,mFenAll INTEGER,localUrl TEXT,port VARCHAR,ReadTime VARCHAR,minNo INTEGER )");
+//    	db.execSQL("CREATE TABLE IF NOT EXISTS down" +
+//    			"(id INTEGER PRIMARY KEY AUTOINCREMENT,mQid INTEGER,mId INTEGER,mName VARCHAR, mUrl TEXT,mNo INTEGER,CreateTime TEXT,mTitle VARCHAR,mDirector VARCHAR,mPic TEXT, mTotal INTEGER,mLianzai VARCHAR,rIndex INTEGER,maxNo INTEGER,isdown INTEGER,downs INTEGER,mType1 INTEGER,mContent VARCHAR,mFenAll INTEGER,localUrl TEXT,port VARCHAR,ReadTime VARCHAR,minNo INTEGER)");
+//    	db.execSQL("insert into comic select null,t.* from tempcomic t"); 
+//    	db.execSQL("insert into down select null,t.* from tempdown t");
+//    	db.execSQL("drop table tempcomic"); 
+//    	db.execSQL("drop table tempdown"); 
+//    	
+//    	/*
+//    	 * 新增多列
+//    	 */
+//    	db.execSQL("ALTER TABLE comic ADD COLUMN pmNo INTEGER"); 
+//    	db.execSQL("ALTER TABLE down ADD COLUMN pmNo INTEGER");
+//    	db.execSQL("ALTER TABLE comic ADD COLUMN nmNo INTEGER"); 
+//    	db.execSQL("ALTER TABLE down ADD COLUMN nmNo INTEGER");
+    }
+
+
+}
+
+
+

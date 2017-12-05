@@ -1,0 +1,31 @@
+package com.ch.comm.netty;
+
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
+import android.os.Handler;
+import android.os.Message;
+
+public class TcpClientHandler extends SimpleChannelInboundHandler<Object> {
+	private Handler handler;
+	public TcpClientHandler(Handler handler){
+		this.handler = handler;
+	}
+	@Override
+	protected void channelRead0(ChannelHandlerContext ctx, Object msg)
+			throws Exception {
+		System.out.println("client接收到服务器返回的消息:"+msg);
+		Message hmsg = handler.obtainMessage();
+		hmsg.obj = msg;
+		handler.sendMessage(hmsg);
+	}
+
+	@Override
+	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+		super.channelInactive(ctx);
+		ctx.channel().disconnect();
+		ctx.channel().close();
+		ctx.close();
+	}
+
+	
+}

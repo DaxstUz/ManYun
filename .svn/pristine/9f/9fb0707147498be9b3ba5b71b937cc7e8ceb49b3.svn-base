@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+             >
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#000000">
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:gravity="center_vertical"
+                android:layout_weight="1.8"
+                >
+
+            <Button
+               android:id="@+id/btn_show_back_setting"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center_vertical"
+               android:layout_marginLeft="20dp"
+               android:layout_marginRight="20dp"
+               android:onClick="onclick"
+               android:background="@drawable/ch_back"
+                    />
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/ll_aboutmy_title_bg"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5.6"
+                android:gravity="center"
+                android:layout_gravity="center"
+             >
+        <TextView
+                android:id="@+id/tv_books_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="#FFFFFF"
+                android:text="@string/my_down_set"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                />
+        </LinearLayout>
+        
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.8"
+                android:gravity="center">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="#FFFFFF"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                />
+        </LinearLayout>
+    </LinearLayout>
+    
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/my_row_system" >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="6" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="14dp"
+                    android:text="非wifi网络阅读提示"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:gravity="center" >
+
+                <ImageButton
+                    android:id="@+id/togglebutton1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@null"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+        <!-- 非WiFi网络阅读提示 -->
+        
+        <TextView
+                       android:layout_width="fill_parent"
+                       android:layout_height="1dp"
+                       android:background="#dbdbdb"
+                       android:layout_marginRight="4dp"
+                       android:layout_marginLeft="4dp"/>
+          
+          <LinearLayout
+	                  android:layout_width="fill_parent"
+	                  android:layout_height="0dp"
+	                  android:layout_weight="1"
+	                  android:background="@drawable/my_row_system">
+            
+              <LinearLayout
+                      android:layout_width="0dp"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center_vertical"
+                      android:layout_weight="6">
+                
+                  <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:layout_marginLeft="14dp"
+                          android:text="仅在wifi下下载"
+                          android:textSize="16sp"/>
+              </LinearLayout>
+
+              <LinearLayout
+                      android:layout_width="0dp"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center_vertical"
+                      android:gravity="center"
+                      android:layout_weight="1">
+
+                 <ImageButton
+                    android:id="@+id/togglebutton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@null"
+                    />
+              </LinearLayout>
+          </LinearLayout>
+          <!-- 仅在WiFi下下载 -->
+          
+           <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#dbdbdb"
+                android:layout_marginRight="4dp"
+                android:layout_marginLeft="4dp"/>
+          
+             <LinearLayout
+                  android:layout_width="fill_parent"
+                  android:layout_height="0dp"
+                  android:layout_weight="1"
+                  android:onClick="onclick"
+                  android:clickable="true"
+                   android:id="@+id/clearlayout"
+                  android:background="@drawable/my_row_system">
+
+              <LinearLayout
+                      android:layout_width="0dp"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center_vertical"
+                      android:layout_weight="5">
+
+                  <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:layout_marginLeft="14dp"
+                          android:text="清理在线阅读缓存"
+                          android:textSize="16sp"/>
+              </LinearLayout>
+
+              <LinearLayout
+                      android:layout_width="0dp"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center_vertical"
+                      android:gravity="right"
+                      android:layout_weight="5">
+
+                  <TextView
+                          android:id="@+id/clearcache"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_marginRight="10dp"
+                          android:text=""/>
+              </LinearLayout>
+          </LinearLayout>
+          <!-- 清理在线阅读缓存 -->
+          
+           <TextView
+                       android:layout_width="fill_parent"
+                       android:layout_height="1dp"
+                       android:background="#dbdbdb"
+                       android:layout_marginRight="4dp"
+                       android:layout_marginLeft="4dp"/>
+           
+           <LinearLayout
+                  android:id="@+id/tofriend"
+                  android:layout_width="fill_parent"
+                  android:layout_height="0dp"
+                  android:layout_weight="1"
+                  android:clickable="true"
+                  android:onClick="onclick"
+                  android:background="@drawable/my_row_system">
+
+              <LinearLayout
+                      android:layout_width="0dp"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center_vertical"
+                      android:layout_weight="8">
+
+                  <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:layout_marginLeft="14dp"
+                          android:text="推荐给好友"
+                          android:textSize="16sp"/>
+              </LinearLayout>
+
+              <LinearLayout
+                      android:layout_width="0dp"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center_vertical"
+                      android:gravity="center"
+                      android:layout_weight="1">
+
+                  <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ch_cate_authgo" />
+              </LinearLayout>
+          </LinearLayout>
+           <!-- 推荐给好友 -->
+          
+           <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#dbdbdb"
+                android:layout_marginRight="4dp"
+                android:layout_marginLeft="4dp"/>
+           
+              <LinearLayout
+                  android:id="@+id/torefresh"
+                  android:layout_width="fill_parent"
+                  android:layout_height="0dp"
+                  android:layout_weight="1"
+                  android:clickable="true"
+                  android:onClick="onclick"
+                  android:background="@drawable/my_row_system">
+
+              <LinearLayout
+                      android:layout_width="0dp"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center_vertical"
+                      android:layout_weight="8">
+
+                  <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:layout_marginLeft="14dp"
+                          android:text="版本更新"
+                          android:textSize="16sp"/>
+              </LinearLayout>
+
+              <LinearLayout
+                      android:layout_width="0dp"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center_vertical"
+                      android:gravity="center"
+                      android:layout_weight="1">
+
+                  <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ch_cate_authgo" />
+              </LinearLayout>
+          </LinearLayout>
+           <!-- 版本更新 -->
+           
+          <TextView
+                     android:layout_width="fill_parent"
+                     android:layout_height="1dp"
+                     android:background="#dbdbdb"
+                     android:layout_marginRight="4dp"
+                     android:layout_marginLeft="4dp"/>
+            
+             <LinearLayout
+                  android:id="@+id/tous"
+                  android:layout_width="fill_parent"
+                  android:layout_height="0dp"
+                  android:layout_weight="1"
+                  android:clickable="true"
+                  android:onClick="onclick"
+                  android:background="@drawable/my_row_system">
+
+              <LinearLayout
+                      android:layout_width="0dp"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center_vertical"
+                      android:layout_weight="8">
+
+                  <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:layout_marginLeft="14dp"
+                          android:text="关于我们"
+                          android:textSize="16sp"/>
+              </LinearLayout>
+
+              <LinearLayout
+                      android:layout_width="0dp"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center_vertical"
+                      android:gravity="center"
+                      android:layout_weight="1">
+
+                  <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ch_cate_authgo" />
+              </LinearLayout>
+          </LinearLayout>
+             
+             <TextView
+                     android:layout_width="fill_parent"
+                     android:layout_height="1dp"
+                     android:background="#dbdbdb"
+                     android:layout_marginRight="4dp"
+                     android:layout_marginLeft="4dp"/>
+            
+             <LinearLayout
+                  android:id="@+id/towork"
+                  android:layout_width="fill_parent"
+                  android:layout_height="0dp"
+                  android:layout_weight="1"
+                  android:clickable="true"
+                  android:onClick="onclick"
+                  android:background="@drawable/my_row_system">
+
+              <LinearLayout
+                      android:layout_width="0dp"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center_vertical"
+                      android:layout_weight="8">
+
+                  <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:layout_marginLeft="14dp"
+                          android:text="免责声明"
+                          android:textSize="16sp"/>
+              </LinearLayout>
+
+              <LinearLayout
+                      android:layout_width="0dp"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center_vertical"
+                      android:gravity="center"
+                      android:layout_weight="1">
+
+                  <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ch_cate_authgo" />
+              </LinearLayout>
+          </LinearLayout>
+          
+             <TextView
+                     android:layout_width="fill_parent"
+                     android:layout_height="1dp"
+                     android:background="#dbdbdb"
+                     android:layout_marginRight="4dp"
+                     android:layout_marginLeft="4dp"/>
+          
+             <TextView
+			        android:layout_width="match_parent"
+			        android:layout_height="0dp"
+			        android:layout_weight="5"
+			        android:layout_marginBottom="30dp"
+             />
+    </LinearLayout>
+    <!-- 关于我们 -->
+</LinearLayout>

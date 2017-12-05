@@ -1,0 +1,5 @@
+package com.ch.mhy.interf;
+
+public interface UpdateEditFlag {
+	public void update(String flags);
+}

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:my="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+
+    <LinearLayout
+		    android:id="@+id/ll_downinfo"
+            android:layout_width="fill_parent"
+            android:layout_height="80dp">
+            
+		<LinearLayout 
+		    android:layout_width="0dp"
+		    android:layout_height="fill_parent"
+		    android:layout_weight="0.8"
+		    android:gravity="center"
+		    >
+		    <CheckBox 
+		        android:id="@+id/cb_donwd"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:focusable="false"
+  				android:focusableInTouchMode="false"
+  				 android:clickable="false"
+		        android:enabled="false"
+		        />
+		</LinearLayout>
+<!--          <com.ch.mhy.widget.ScaleLinearLayout -->
+<!--                 android:layout_width="0dp" -->
+<!--                 android:layout_height="wrap_content" -->
+<!--                 android:layout_weight="1" -->
+<!--                 my:aspectRatio="1.0" -->
+<!--                 android:gravity="center" -->
+<!--                 my:aspectRatioBase="0"> -->
+
+<!--             <ImageView -->
+<!--                 android:id="@+id/iv_book_head" -->
+<!--                     android:layout_width="fill_parent" -->
+<!--                     android:layout_height="fill_parent" -->
+<!--                     android:layout_margin="5dp" -->
+<!--                     android:scaleType="fitXY" -->
+<!--                     android:src="@drawable/ch_image_mobg2"/> -->
+<!--         </com.ch.mhy.widget.ScaleLinearLayout> -->
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="4"
+                android:orientation="vertical">
+
+            <FrameLayout 
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                    android:layout_weight="2"
+                >
+            <TextView
+                android:id="@+id/tv_book_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/tv_book_downinfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="right"
+                    android:gravity="center_vertical"
+                   />
+            </FrameLayout>
+
+            
+
+            <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:max="300"
+                    android:progress="200"
+                    android:indeterminateOnly="false"
+                    android:progressDrawable="@drawable/po_seekbar"
+                    />
+        </LinearLayout>
+        
+        <FrameLayout 
+            android:layout_width="60dp"
+                    android:layout_height="fill_parent"
+            >
+        
+       <ImageView
+                android:id="@+id/iv_book_auth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_margin="10dp"
+                    />
+                   <!--  android:background="@drawable/ch_xk" -->
+<!--         <ImageView -->
+<!--                     android:id="@+id/tv_bookreaded_del" -->
+<!--                     android:layout_width="wrap_content" -->
+<!--                     android:layout_height="wrap_content" -->
+<!--                     android:layout_margin="10dp" -->
+<!--                     android:layout_gravity="center" -->
+<!--                     android:gravity="center" -->
+<!--                     android:background="@drawable/downdelete" -->
+<!--                     /> -->
+       </FrameLayout>
+
+
+    </LinearLayout>
+     <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="0.1dp"
+        android:background="#c9c9c9"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        />
+    
+</LinearLayout>

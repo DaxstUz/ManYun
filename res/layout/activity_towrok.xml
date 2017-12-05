@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#000000">
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:layout_weight="1.8"
+                >
+
+            <Button
+               android:id="@+id/btn_show_back_aboutus"
+               android:onClick="onclick"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               android:gravity="center"
+               android:background="@drawable/ch_back"
+                    />
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/ll_aboutmy_title_bg"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5.6"
+                android:gravity="center"
+                android:layout_gravity="center">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="#FFFFFF"
+                android:text="@string/towroktitle"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                />
+        </LinearLayout>
+        
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.8"
+                android:gravity="center">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="#FFFFFF"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                />
+        </LinearLayout>
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        >
+    <TextView
+        android:id="@+id/towork1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/towrok1"
+        android:textSize="12sp"
+         />
+    
+    <TextView
+        android:id="@+id/towork2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/towrok2"
+        android:textSize="12sp"
+        android:layout_marginTop="10dp"
+        android:gravity="left"
+         />
+    
+    <TextView
+        android:id="@+id/towork3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/towrok3"
+        android:textSize="12sp"
+        android:layout_marginTop="10dp"
+         />
+    
+    <TextView
+        android:id="@+id/towork4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+         />
+    </LinearLayout>
+</LinearLayout>

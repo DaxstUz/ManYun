@@ -1,0 +1,85 @@
+package com.ch.mhy.adapter;
+
+import java.util.List;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.ch.mhy.R;
+import com.ch.mhy.util.DateUtil;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+/**
+ * 我的消息适配器
+ * @author DaxstUz 2416738717
+ * 2015年10月17日
+ *
+ */
+public class MsgAdapter extends BaseAdapter {
+	
+	private Context context;
+	private List<JSONObject> list;
+	public MsgAdapter(Context context,List<JSONObject> list) {
+		this.context=context;
+		this.list=list;
+	}
+
+	@Override
+	public int getCount() {
+		// TODO Auto-generated method stub
+		return list.size();
+	}
+
+	@Override
+	public Object getItem(int arg0) {
+		// TODO Auto-generated method stub
+		return list.get(arg0);
+	}
+
+	@Override
+	public long getItemId(int arg0) {
+		// TODO Auto-generated method stub
+		return arg0;
+	}
+	
+	@Override
+	public View getView(int arg0, View arg1, ViewGroup arg2) {
+		View view=LayoutInflater.from(context).inflate(R.layout.msg_adapter_item, null);
+		
+		ImageView iv_comm_item=(ImageView) view.findViewById(R.id.iv_comm_item);
+		ImageView iv_msg=(ImageView) view.findViewById(R.id.iv_msg);
+		TextView tv_comm_title=(TextView) view.findViewById(R.id.tv_comm_title);
+		TextView tv_comm_topic=(TextView) view.findViewById(R.id.tv_comm_topic);
+		TextView tv_comm_time=(TextView) view.findViewById(R.id.tv_comm_time);
+		TextView tv_discussNum=(TextView) view.findViewById(R.id.tv_discussNum);
+		TextView tv_approveNum=(TextView) view.findViewById(R.id.tv_approveNum);
+		
+		try {
+			ImageLoader.getInstance().displayImage(list.get(arg0).getString("comicUrl"), iv_comm_item);
+			tv_comm_title.setText(list.get(arg0).getString("comicName"));
+			tv_comm_topic.setText(list.get(arg0).getString("topic"));
+			tv_comm_time.setText(DateUtil.paseFromStr(list.get(arg0).getLong("createTime")));
+			tv_discussNum.setText(list.get(arg0).getString("discussNum"));
+			tv_approveNum.setText(list.get(arg0).getString("approveNum"));
+			
+			if(!list.get(arg0).isNull("isRead")&&list.get(arg0).getInt("isRead")==1){
+				iv_msg.setVisibility(View.VISIBLE);
+			}else{
+				iv_msg.setVisibility(View.GONE);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		return view;
+	}
+
+}

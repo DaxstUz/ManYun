@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_read"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <FrameLayout
+        android:id="@+id/fl_bookmain"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:onClick="onclick" >
+
+        <com.ch.mhy.widget.ImageCycleView2
+            android:id="@+id/ch_read_view"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center" />
+
+        <LinearLayout
+            android:id="@+id/pbView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#e0000000"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <ProgressBar
+                android:id="@+id/mypb"
+                style="@style/progressBar_vertical"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/tab_cloud_select"
+                android:max="20"
+                android:maxHeight="100dip"
+                android:minHeight="0dip" />
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="214dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/tab_cloud_select_word" />
+        </LinearLayout>
+    </FrameLayout>
+
+</FrameLayout>

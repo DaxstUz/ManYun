@@ -1,0 +1,800 @@
+package com.ch.mhy.activity.my;
+
+import java.io.File;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
+
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.ch.mhy.R;
+import com.ch.mhy.activity.book.DownSelectActivity;
+import com.ch.mhy.activity.book.ReadingActivity;
+import com.ch.mhy.activity.book.ShowDetailActivity;
+import com.ch.mhy.adapter.DownShowAdapter;
+import com.ch.mhy.db.DBManager;
+import com.ch.mhy.db.DBUtil;
+import com.ch.mhy.download.ImageDownProgress;
+import com.ch.mhy.entity.Comics;
+import com.ch.mhy.entity.ComicsDetail;
+import com.ch.mhy.entity.Down;
+import com.ch.mhy.entity.UpdateInfo;
+import com.ch.mhy.fragment.DownloadFragment;
+import com.ch.mhy.net.NetReceiver;
+import com.ch.mhy.net.NetReceiver.NetState;
+import com.ch.mhy.util.FileUtil;
+import com.ch.mhy.util.SDUtil;
+import com.ch.mhy.util.Utils;
+
+/**
+ * 查看某一本漫画的下载详情
+ * 
+ * @author liuwenli
+ *
+ */
+
+public class DownShowActivity extends Activity {
+
+	private ListView lv_downshow;//显示下载项
+
+	private DBManager manager = null;//数据库管理
+	
+	private DownShowAdapter adapter;
+
+	private TextView tv_show_title;
+	
+	private TextView tv_my_edit;
+
+	private boolean flag = true;
+
+	private Comics comics;//漫画基本信息
+	
+	private Toast toast;//添加wifi提醒
+	
+	private SharedPreferences sharedPreferences;
+	
+	private String mId;//漫画ID号
+	
+	private boolean flag2=true;//设置默认是可以下载的
+	
+	private boolean isdelay = true;//防止重复点击下载，不停开启线程功能
+	
+	private Down waitDown = null;
+	
+	private MyReceiver receiver;
+	
+	private List<Down> list=null;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_downshow);
+		// 注册接收器
+		receiver = new MyReceiver();
+		IntentFilter filter = new IntentFilter();
+		filter.addAction("android.intent.action.test");
+		this.registerReceiver(receiver, filter);
+				
+		sharedPreferences = this.getSharedPreferences("userConfig", 0);
+		mId = (String) getIntent().getSerializableExtra("ben");//上一页面选中的下载漫画
+		//当设置了wifi下载，而当前的网络不是wifi连接就变为不可下载
+		if(sharedPreferences.getBoolean("wifidown", false)){
+			if(NetReceiver.isConnected(this) != NetReceiver.NetState.NET_WIFI){
+				flag2=false;
+			}
+		}
+		initView();
+	}
+	
+	
+
+	private void initView() {
+		tv_my_edit = (TextView) findViewById(R.id.tv_my_edit);//编辑
+		tv_show_title = (TextView) findViewById(R.id.tv_show_title);//标题
+		lv_downshow = (ListView) findViewById(R.id.lv_downshow);//下载项
+		
+		if(manager==null){
+			manager = new DBManager(this, DBUtil.ReadName, null, DBUtil.Code);
+		}
+		
+		if(Utils.getDownChapterListByMid(mId)==null||Utils.getDownChapterListByMid(mId).size()==0){//后台下载项为空时
+			Utils.getDownChapterListByMid(mId).clear();
+			Utils.getDownChapterListByMid(mId).addAll(manager.queryDown("select * from down  where mId =? order by mNo",
+					new String[] { mId + "" }));//找出现在所有下的章节
+		}
+		
+
+		for (Down i : Utils.getDownChapterListByMid(mId)) {
+			ComicsDetail cd = i.getCd();//得到漫画
+			cd.setFlag(flag);//设置为可下载
+			i.setCd(cd);
+		}
+		comics = new Comics();
+		String title = Utils.getDownChapterListByMid(mId).get(0).getCd().getmTitle();
+		comics.setmTitle(title);
+		comics.setmPic(Utils.getDownChapterListByMid(mId).get(0).getCd().getmPic());
+		comics.setmDirector(Utils.getDownChapterListByMid(mId).get(0).getCd().getmDirector());
+		comics.setmLianzai(Utils.getDownChapterListByMid(mId).get(0).getCd().getmLianzai());
+		comics.setmQid(Long.valueOf(Utils.getDownChapterListByMid(mId).get(0).getCd().getmId().toString()));
+		comics.setmType1(Utils.getDownChapterListByMid(mId).get(0).getCd().getmType1());
+		comics.setmContent(Utils.getDownChapterListByMid(mId).get(0).getCd().getmContent());
+
+		title = title.length() > 6 ? title.substring(0, 6) : title;
+		tv_show_title.setText(title);
+
+		list=Utils.getDownChapterListByMid(mId);
+		adapter = new DownShowAdapter(this,list);//初始化适配显示
+		lv_downshow.setAdapter(adapter);
+
+		lv_downshow.setOnItemClickListener(new OnItemClickListener() {//暂停，开始
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Down down = (Down)adapter.getItem(position);
+				ComicsDetail cd = down.getCd();
+				ImageDownProgress progress = down.getImageDownProgress();
+				try {
+					if (!cd.isFlag()) {//删除下载项，加入提示删除本漫画
+	            		//if(down.getIsdonw()==1){
+	            		//	DownShowActivity.this.showTextToast("请停暂停下载再做删除操作！");
+	            		//}else{
+	            			createDialog(down,position);
+	            		//}
+					} else {
+						switch (down.getIsdonw()) {
+						case 0://表示已经完成的直接跳到阅读页面
+							Intent startlook = new Intent(DownShowActivity.this,
+									ReadingActivity.class);
+							startlook.putExtra("mh", Utils.getDownChapterListByMid(mId).get(position).getCd());
+							startlook.putExtra("comefrom", "0");
+							DownShowActivity.this.startActivityForResult(startlook, 1);
+							break;
+						case 1: // 现在是正在下载状态，点一下变成暂停
+							if(!flag2){
+								DownShowActivity.this.showTextToast("您设置了wifi下下载！");
+								return;
+							}
+							down.setDownflag(false);
+							down.getDown_status_image().setBackgroundResource(R.drawable.downstart);
+							
+							try{
+								progress.stopDown();//如果
+								waitDown = down;
+							}catch(Exception es){
+								es.printStackTrace();
+								File sdcardDir = Environment.getExternalStorageDirectory();
+								String path = SDUtil.getSecondExterPath() + "/manyun/"
+										+ down.getCd().getmTitle() + "/" + down.getCd().getmName();
+								down.setImageDownProgress(new ImageDownProgress(path));
+								waitDown = down;
+							}
+							down.setIsdonw(2);//状态变成正为暂停
+							break;
+						case 3: // 现在是暂停状态，可以进行下载
+							if(!flag2){
+								DownShowActivity.this.showTextToast("您设置了wifi下下载！");
+								return;
+							}
+							if(isDowning()){
+								DownShowActivity.this.showTextToast("等前一个下载项下完！");
+								return;
+							}
+							down.setDownflag(true);
+							down.getDown_status_image().setBackgroundResource(R.drawable.downstop);
+							Thread downLoadThread1 = new Thread(new WebHttpHandler(progress,down));
+							downLoadThread1.start();
+							down.setIsdonw(1);//状态设为下载
+							break;
+						case 2:// 图标是暂停，表示正在下载，说明这个时候要执行停止下载
+							if(!flag2){
+								DownShowActivity.this.showTextToast("您设置了wifi下下载！");
+								return;
+							}
+							if(isDowning()){
+								DownShowActivity.this.showTextToast("等前一个下载项下完！");
+								return;
+							}
+							down.setDownflag(true);
+							down.setIsdonw(1);//图标设为下载
+							down.getDown_status_image().setBackgroundResource(R.drawable.downstop);
+							Thread downLoadThread = new Thread(new WebHttpHandler(progress,down));
+							downLoadThread.start();
+							break;
+						default:
+							break;
+						}
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+					//manager.closeDB();
+					//manager = null;
+				} finally{
+					
+				}
+			}
+		});
+	}
+
+	  
+	  private boolean isDownOver(){
+		  if(Utils.getDownChapterListByMid(mId)!=null&&Utils.getDownChapterListByMid(mId).size()!=0){
+			  int totalCount = Utils.getDownChapterListByMid(mId).size();
+			  int count = 0;
+			  for(Down down : Utils.getDownChapterListByMid(mId)){
+				  if(down.getIsdonw()==0){
+					  count ++ ;
+				  }
+			  }
+			  if(count==totalCount){
+				  return true;
+			  }else{
+				  return false;
+			  }
+		  }else{
+			  return false;
+		  }
+	  }
+	  
+		private void downNextChapter(){
+			for(Down down : Utils.getDownChapterListByMid(mId)){
+				Thread downLoadThread1 = null;
+				if(down.getIsdonw()==3||down.getIsdonw()==2){//纰板埌鏆傚仠涓庣瓑寰呯殑灏卞紑鍚笅杞�
+					try {
+						if(down.isDownflag()){
+							ImageDownProgress progress = down.getImageDownProgress();
+							if(progress!=null){
+								downLoadThread1 = new Thread(new WebHttpHandler(progress,down));
+								downLoadThread1.start();
+							}
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					break;
+				}
+			}
+		}
+	class LooperThread extends Thread {
+        Handler mHandler;
+        Down down;
+        boolean flag;//表示这个down是指定开始下载的
+        public void setHandler(Handler mHandler,Down down){
+            this.mHandler = mHandler;
+            this.down = down;
+        }
+        public void setHandler(Handler mHandler,Down down,boolean flag){
+            this.mHandler = mHandler;
+            this.down = down;
+            this.flag = flag;
+        }
+        @Override
+        public void run() {
+			ImageDownProgress progress = down.getImageDownProgress();
+			if(progress!=null){
+                Message message = Message.obtain();
+                message.obj = down;
+                message.what = 1;
+                mHandler.sendMessage(message);
+        	}
+        }
+    }
+	private Handler handler = new Handler(){
+	    @Override
+	    public void handleMessage(Message msg) {
+		    Integer count = (Integer) msg.getData().get("count");
+		    Integer max = (Integer) msg.getData().get("max");
+		    Down down = (Down)msg.obj;
+		    if(!"0".equals(down.getIsdonw().toString())&&down.isDownflag()){
+		    NumberFormat numberFormat = NumberFormat.getInstance();
+			numberFormat.setMaximumFractionDigits(0);
+			String result = numberFormat.format((float)count / max	* 100);
+			String str=result+"%";
+			if(down.getTx_down_percentage()!=null){
+				down.getTx_down_percentage().setText(str);
+				down.getProgressBar().setProgress(count);
+				down.getDown_status_image().setBackgroundResource(R.drawable.downstop);
+			}
+		    down.setDowns(count);
+			try {
+				if(max.intValue()==count.intValue()){
+					down.setIsdonw(0);
+					manager = new DBManager(DownShowActivity.this, DBUtil.ReadName, null, DBUtil.Code);
+					manager.updateDown(down.getCd().getmQid(),0);
+					if(down.getTx_down_percentage()!=null){
+					down.getTx_down_percentage().setText("100%");
+					down.getDown_status_image().setBackgroundResource(R.drawable.downread);
+					down.getProgressBar().setVisibility(View.GONE);
+					}
+					manager.closeDB();
+					if(!isDownOver()){
+						downNextChapter();
+					}else{
+						Utils.updateDownShow.updateDownTotal();
+					}
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				manager.closeDB();
+			}
+		    }else{
+		    	if(!down.isDownflag()){
+		    		down.getDown_status_image().setBackgroundResource(R.drawable.downstart);
+		    	}
+		    }
+	    }
+	  };
+	class WebHttpHandler implements Runnable{//这个是下载图片，负责更新传过去的下载状态
+		private ImageDownProgress progress;
+		private Down chapter;
+		private int isPoint = 0;
+	    public WebHttpHandler(ImageDownProgress progress,Down down) {
+	    	this.progress = progress;
+	    	this.chapter = down;
+		}
+	    public WebHttpHandler(ImageDownProgress progress,Down down,int isPoint) {
+	    	this.progress = progress;
+	    	this.chapter = down;
+	    	this.isPoint = isPoint;
+		}
+		@Override
+	    public void run() {
+			boolean result = false;
+			try {
+				if(chapter.getCd().getmUrl()!=null){
+				String[] urlArray = chapter.getCd().getmUrl().split(Utils.split);
+				String[] urlLocal = chapter.getCd().getLocalUrl().split("@@");
+				int count = 0;
+				chapter.setIsdonw(1);
+				List<Down> list1 = Utils.getDownChapterListByMid(mId);
+				for(int j=0;j<list1.size();j++){
+					String mqid = list1.get(j).getCd().getmQid().toString();
+					if(mqid.equals(chapter.getCd().getmQid().toString())){
+						list1.set(j, chapter);
+					}
+				}
+				for(int i=0;i<urlArray.length;i++){//从几页开始下
+					if(chapter.isDownflag()&&chapter.getIsdonw()!=0){
+						result = progress.startDown(urlArray[i],urlLocal[i],chapter.getCd().port);
+						if(result){
+							count++;
+							Message message = new Message();
+						    Bundle bundle = new Bundle();
+						    bundle.putInt("count", count);
+						    bundle.putInt("max", urlArray.length);
+						    message.obj = chapter;
+						    message.setData(bundle);//消息内容
+						    handler.sendMessage(message);//发送消息
+						}else{
+							progress.renotify();
+							progress.startDown(urlArray[i],urlLocal[i],chapter.getCd().port);
+						}
+					}else{//没有下完的放空，业状态置为等待
+						if(i<urlArray.length-1){
+						chapter.setIsdonw(2);//状态设为暂停
+						/*List<Down> list = Utils.getDownChapterListByMid(mId);
+						for(int j=0;j<list.size();j++){
+							String mqid = list.get(j).getCd().getmQid().toString();
+							if(mqid.equals(chapter.getCd().getmQid().toString())){
+								list.set(j, chapter);
+								break;
+							}
+						}*/
+						isdelay = true;
+						}
+					}
+				}
+				if(isPoint==1){//指定的这一话已经下完了，把标志位设回来
+					isdelay = true;
+					waitDown = null;
+					//down.setIsdonw(0);
+				}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+	  }
+	
+	// 不重复显示Toast的方法
+	private void showTextToast(String msg){
+		if (toast == null){
+			toast = Toast.makeText(getApplicationContext(), msg, 500);
+		}else{
+			toast.setText(msg);
+		}
+		toast.show();
+	}
+	
+	private boolean isDowning(){
+		boolean flag = false;
+		for(Down down : Utils.getDownChapterListByMid(mId)){
+			if(down.getIsdonw()==1){
+				flag = true;
+				break;
+			}
+		}
+		return flag;
+	}
+	
+	public void onclick(View view) {
+			switch (view.getId()) {
+			case R.id.btn_return_back:
+				this.finish();
+				break;
+			case R.id.ll_down_add://加入漫画章节
+				if (NetReceiver.isConnected(this) != NetState.NET_NO) {
+				Intent intent1 = new Intent(this, DownSelectActivity.class);
+				comics.setmIf("1");
+				intent1.putExtra("mh", comics);
+				this.startActivityForResult(intent1, 0);
+				}else {
+						Utils.showMsg(this, "没联网...");
+					}
+				break;
+			case R.id.ll_down_start://全部开始下载
+				 //添加wifi下载提示
+				if(!flag2){
+					DownShowActivity.this.showTextToast("您设置了wifi下下载！");
+					return;
+				}
+				
+				if(isdelay&&!isDowning()&&waitDown!=null){//正在等待中....
+					DownShowActivity.this.showTextToast("正在为您开启下载...");
+					startDownThreadPause(waitDown);
+					DownloadFragment.instance.setState(mId, "下载中",Utils.getDownChapterListByMid(mId).size()+"");
+				}else{
+					startDownThread();
+				}
+				
+				
+				break;
+			case R.id.ll_down_stop://全部开始停止
+				int downstop=0;
+				Down temDown = null;
+				for(Down down : list){
+//					Down down = (Down)adapter.getItem(position);
+					temDown = ((Down)adapter.getItem(downstop++));
+					
+					ImageDownProgress progress = temDown.getImageDownProgress();
+					
+					try {
+						progress.stopDown();
+					} catch (Exception e1) {
+						e1.printStackTrace();
+						// TODO Auto-generated catch block
+						File sdcardDir = Environment.getExternalStorageDirectory();
+						String path = sdcardDir.getPath() + "/manyun/"
+								+ down.getCd().getmTitle() + "/" + down.getCd().getmName();
+						down.setImageDownProgress(new ImageDownProgress(path));
+						waitDown = temDown;
+					}
+					if(1==down.getIsdonw()){//正在下载的全部停了
+						down.setDownflag(false);
+						try {
+							try{
+								down.setIsdonw(2);//状态变成正为暂停
+								manager = new DBManager(DownShowActivity.this, DBUtil.ReadName, null, DBUtil.Code);
+								manager.updateDown(down.getCd().getmQid(),2);
+								manager.closeDB();
+								down.getImageDownProgress().stopDown();
+							}catch(Exception e){
+								//e.printStackTrace();
+								File sdcardDir = Environment.getExternalStorageDirectory();
+								String path = sdcardDir.getPath() + "/manyun/"
+										+ down.getCd().getmTitle() + "/" + down.getCd().getmName();
+								down.setImageDownProgress(new ImageDownProgress(path));
+								if(temDown==null)
+									waitDown = down;
+								else
+									waitDown = temDown;
+							}
+							if(temDown==null)
+								waitDown = down;
+							else
+								waitDown = temDown;
+							try {
+								down.getDown_status_image().setBackgroundResource(R.drawable.downstart);
+								DownShowActivity.this.showTextToast("暂停下载");
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+							try {
+								temDown.getImageDownProgress().stopDown();
+								waitDown = temDown;
+							} catch (Exception e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+								waitDown = temDown;
+							}
+						}
+					}
+				}
+				adapter.notifyDataSetChanged();
+				break;
+			case R.id.ll_read_start://开始阅读
+				Intent intent = new Intent(this, ShowDetailActivity.class);
+				intent.putExtra("manhua", comics);
+				intent.putExtra("eventId", "my_book_click");
+				this.startActivity(intent);
+				break;
+			case R.id.ll_my_edit:
+				
+				flag = !flag;
+				if (flag) {
+					tv_my_edit.setText("编辑");
+				} else {
+					tv_my_edit.setText("取消");
+				}
+
+				for (Down i : Utils.getDownChapterListByMid(mId)) {
+					ComicsDetail cd = i.getCd();
+					cd.setFlag(flag);
+					i.setCd(cd);
+				}
+				adapter = new DownShowAdapter(this,Utils.getDownChapterListByMid(mId));
+				lv_downshow.setAdapter(adapter);
+				break;
+			default:
+				break;
+		}
+	}
+
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		if(requestCode==0){//从添加新话下载返回
+			adapter = new DownShowAdapter(this,Utils.getDownChapterListByMid(mId));//初始化适配显示
+			lv_downshow.setAdapter(adapter);
+			
+			manager = new DBManager(this, DBUtil.ReadName, null, DBUtil.Code);
+			Utils.updateDownShow.updateDownTotal();
+			startDownThread();
+			if(Utils.updateCollectInfo!=null){
+				Utils.updateCollectInfo.updateDowns();
+			}
+		}else{//从阅读返回不做下载动作
+			
+		}
+	}
+	
+	Handler mHandler = new HandlerExtension();
+	@SuppressLint("HandlerLeak")
+	private final class HandlerExtension extends Handler {
+		@Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Down down = (Down)msg.obj;
+			Thread downLoadThread1 = new Thread(new WebHttpHandler(down.getImageDownProgress(),down,msg.what));
+			downLoadThread1.start();
+        }
+	}
+	private void startDownThread() {
+		boolean floag = true;
+		if(isDownOver()){
+			manager = new DBManager(this, DBUtil.ReadName, null, DBUtil.Code);
+		}
+		if(!isDowning()){//没有下载项时，开启下载
+			for(Down down:Utils.getDownChapterListByMid(mId)){
+				if(2==down.getIsdonw()||3==down.getIsdonw()){
+					floag = false;
+					down.setDownflag(true);
+					down.setIsdonw(1);
+					LooperThread thread = new LooperThread();
+		            thread.setHandler(mHandler,down);
+		            thread.start();
+		            break;
+				}
+			}
+		}
+		if(isDownOver()&&floag){//全部下完了点开始，要关掉下载
+			manager.closeDB();
+		}
+	}
+	private void startDownThreadPause(Down down) {
+		isdelay = false;
+		down.setDownflag(true);
+		down.setIsdonw(1);
+		LooperThread thread = new LooperThread();
+		thread.setHandler(mHandler,down);
+		thread.start();
+	}
+	protected void createDialog(final Down down,final int position) {
+		AlertDialog.Builder builder = new Builder(this);
+		builder.setMessage("是否同时删除本话下载的图片文件？");
+		builder.setTitle("提示");
+		builder.setPositiveButton("是", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				doDeleteFile(down, position, true);
+				dialog.dismiss();
+			}
+		});
+		builder.setNegativeButton("否", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+		builder.create().show();
+	}
+
+	private void doDeleteFile(final Down down, final int position,
+			boolean flag) {
+		if(down.getIsdonw()==1){//不是正在下载的都可以删除
+			//Utils.showMsg(DownShowActivity.this, "请先暂停下载！");
+			try {
+				down.setDownflag(false);
+				flag = true;
+				//down.getImageDownProgress().downWait();//停止下载
+				down.getImageDownProgress().stopDown();//停止下载
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		manager = new DBManager(DownShowActivity.this,DBUtil.ReadName, null, DBUtil.Code);
+		manager.delete(down);
+		Utils.getDownChapterListByMid(mId).remove(position);
+		
+		adapter.notifyDataSetChanged();
+		if(Utils.getDownChapterListByMid(mId).size()==0){
+			Utils.updateDownShow.removeDownComics(mId);
+			Utils.updateCollectInfo.updateDowns();
+	    }
+		if(down.getIsdonw()==1){//删除的这一话正在下载，则开启指定这一话的下一话
+			Down downing = Utils.getDownChapterListByMid(mId).get(position);
+			if(downing!=null){
+				startDownThreadPause(downing);
+			}
+		}
+		if(flag){//删除目录
+			File sdcardDir = Environment.getExternalStorageDirectory();
+			String path = sdcardDir.getPath() + "/manyun/"+down.getCd().getmTitle()+"/"+down.getCd().getmName();
+			FileUtil.deleteDirectory(path);
+			manager.closeDB();
+		}
+		
+	}
+	
+	private UpdateInfo down;
+	
+	public class MyReceiver extends BroadcastReceiver {
+		// 自定义一个广播接收器
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			Bundle bundle = intent.getExtras();
+			down =  (UpdateInfo) bundle.getSerializable("down");
+			int positon = 0;
+			for (Down d : list) {
+				if (d.getCd().getmQid().equals(down.getMqid())) {
+					d.setDowns(down.getProcess());
+					publishProgress(positon, down.getProcess());
+					d.setIsdonw(1);
+					publishStatus(positon,null);
+					if (down.getProcess()==d.getCd().getmUrl().split(Utils.split).length) {
+						d.setIsdonw(0);
+						publishStatus(positon,null);
+					}
+					publishDowninfo(positon);
+				}
+				positon++;
+			}
+
+		}
+
+		public MyReceiver() {
+			// 构造函数，做一些初始化工作，本例中无任何作用
+		}
+
+	}
+	
+	/**
+	 * |更新进度条
+	 * @param positionInAdapter //更新的位置
+	 * @param progress //进度值
+	 */
+	public void publishProgress(final int positionInAdapter, final int progress) {
+		if (positionInAdapter >= lv_downshow.getFirstVisiblePosition()
+				&& positionInAdapter <= lv_downshow.getLastVisiblePosition()) {
+			int positionInListView = positionInAdapter
+					- lv_downshow.getFirstVisiblePosition();
+			ProgressBar item = (ProgressBar) lv_downshow.getChildAt(
+					positionInListView).findViewById(R.id.progressBar);
+			item.setProgress(progress);
+			if(list.get(positionInAdapter).getCd().getmUrl().split(Utils.split).length==progress){
+				item.setVisibility(View.GONE);
+			}
+			
+			DownloadFragment.instance.setState(mId, "下载中",Utils.getDownChapterListByMid(mId).size()+"");
+		}
+
+	}
+	
+	/**
+	 * 更新下载的状态
+	 * @param positionInAdapter
+	 * @param status
+	 */
+	public void publishStatus(final int positionInAdapter, final String status) {
+		if (positionInAdapter >= lv_downshow.getFirstVisiblePosition()
+				&& positionInAdapter <= lv_downshow.getLastVisiblePosition()) {
+			int positionInListView = positionInAdapter
+					- lv_downshow.getFirstVisiblePosition();
+			ImageView item = (ImageView) lv_downshow.getChildAt(
+					positionInListView).findViewById(R.id.iv_book_auth);
+			// 下载状态  0表示完成，1表示继续下载,2表示暂停
+			//System.out.println("status>>>>"+list.get(positionInAdapter).getIsdonw());
+//			item.setBackgroundResource(R.drawable.downstop);
+			switch (list.get(positionInAdapter).getIsdonw()) {
+			case 0:
+				item.setBackgroundResource(R.drawable.downread);
+				break;
+			case 1:
+				item.setBackgroundResource(R.drawable.downstop);
+				break;
+			case 2:
+				item.setBackgroundResource(R.drawable.downstart);
+				break;
+			case 3:
+				item.setBackgroundResource(R.drawable.downstart);
+				break;
+			default:
+				break;
+			}
+		}
+
+	}
+	
+	/**
+	 * 更新下载百分比
+	 * @param positionInAdapter
+	 */
+	public void publishDowninfo(final int positionInAdapter) {
+		if (positionInAdapter >= lv_downshow.getFirstVisiblePosition()
+				&& positionInAdapter <= lv_downshow.getLastVisiblePosition()) {
+			int positionInListView = positionInAdapter
+					- lv_downshow.getFirstVisiblePosition();
+			TextView tv_book_downinfo = (TextView) lv_downshow.getChildAt(
+					positionInListView).findViewById(R.id.tv_book_downinfo);
+			
+			NumberFormat numberFormat = NumberFormat.getInstance();// 设置精确到小数点后2位
+			numberFormat.setMaximumFractionDigits(0);
+			String result = numberFormat.format((float) down.getProcess()
+					/ (float) list.get(positionInAdapter).getCd().getmUrl().split(Utils.split).length
+					* 100);
+			String str = result + "%";
+			tv_book_downinfo.setText(str);
+		}
+
+	}
+}

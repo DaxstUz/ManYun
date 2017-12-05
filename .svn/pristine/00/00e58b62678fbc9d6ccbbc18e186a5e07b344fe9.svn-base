@@ -1,0 +1,39 @@
+package com.ch.mhy.activity.my;
+
+import com.ch.mhy.R;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+
+/**
+ * 精彩推荐界面
+ * 
+ * @author DaxstUz 2416738717 2015年8月29日
+ *
+ */
+public class WonRecActivity extends Activity {
+
+	private ImageView iv_appinfo;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_wonrec);
+		iv_appinfo = (ImageView) findViewById(R.id.iv_appinfo);
+
+		/*
+		 * 设置图片的显示宽、高
+		 */
+		LayoutParams linearParams = iv_appinfo.getLayoutParams(); // 取控件textView当前的布局参数
+		linearParams.width = this.getWindowManager().getDefaultDisplay()
+				.getWidth();
+		linearParams.height = this.getWindowManager().getDefaultDisplay()
+				.getWidth() * 100 / 225;
+		iv_appinfo.setLayoutParams(linearParams);
+
+	}
+}

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:test="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2">
+
+            <com.ch.mhy.widget.ScaleLinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    test:aspectRatio="1.0"
+                    test:aspectRatioBase="0">
+
+                <ImageView
+                        android:id="@+id/iv_searchresult_show"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_margin="5dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ch_image_mobg2"/>
+            </com.ch.mhy.widget.ScaleLinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="3"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/tv_seatchitem_bookname"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:text="美国队长V5"
+                    android:textStyle="bold"
+                    />
+
+            <TextView
+                    android:id="@+id/tv_seatchitem_auth"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="作者：Marvel Comics"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="#dbdbdb"/>
+
+            <TextView
+                    android:id="@+id/tv_seatchitem_peoes"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="人气：5633210"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="#dbdbdb"/>
+        </LinearLayout>
+    </LinearLayout>
+    
+    <TextView 
+        android:layout_width="fill_parent"
+        android:layout_height="0.1dp"
+        android:background="#c9c9c9"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        />
+
+</LinearLayout>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#FFFFFF"
+              android:orientation="vertical">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#000000">
+
+        <LinearLayout
+                android:id="@+id/btn_collect_back"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.8"
+                android:gravity="center"
+                android:onClick="onclick">
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ch_back"
+                    android:gravity="center"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/ll_aboutmy_title_bg"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5.6"
+                android:layout_gravity="center">
+
+            <Button
+                    android:id="@+id/btn_my_readed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onclick"
+                    android:text="@string/myread"
+                    android:background="@drawable/ch_aboutmy_nobg"
+                    />
+
+            <Button
+                    android:id="@+id/btn_my_download"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onclick"
+                    android:text="@string/mydown"
+                    android:background="@drawable/ch_aboutmy_nobg"/>
+
+            <Button
+                    android:id="@+id/btn_my_collect"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onclick"
+                      android:text="@string/mycollet"
+                    android:background="@drawable/ch_aboutmy_nobg"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.8"
+                android:id="@+id/ll_my_edit"
+                android:onClick="onclick"
+                android:gravity="center"
+                >
+
+            <TextView
+                	android:id="@+id/tv_my_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ch_about_edit"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/edit"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="#dbdbdb"
+                    />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+            android:id="@+id/collent_content"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:orientation="horizontal"
+            >
+
+    </LinearLayout>
+
+</LinearLayout>

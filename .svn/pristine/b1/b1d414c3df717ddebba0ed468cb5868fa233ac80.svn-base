@@ -1,0 +1,1185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:test="http://schemas.android.com/apk/res/com.ch.mhy"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#f3f3f3"
+              android:orientation="vertical">
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#000000"
+                android:orientation="vertical">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ch_my_title"/>
+
+            <LinearLayout
+                    android:id="@+id/ll_book_reading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="20dp">
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/book"/>
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#db332C"/>
+
+    <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:orientation="vertical">
+
+        <com.ch.mhy.widget.MyScrollView2
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+            <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+
+<!--                     <com.ch.mhy.widget.ImageCycleView -->
+<!--                             android:id="@+id/ad_view" -->
+<!--                             android:layout_width="150dp" -->
+<!--                             android:layout_height="match_parent"/> -->
+<!--                     <com.ch.mhy.viewpager.CycleViewPager -->
+<!--       				  android:id="@+id/fragment_cycle_viewpager_content" -->
+<!--       				  android:layout_width="match_parent" -->
+<!--        				  android:layout_height="wrap_content" /> -->
+                    <fragment
+       					android:name="com.ch.mhy.viewpager.CycleViewPager"
+      				  android:id="@+id/fragment_cycle_viewpager_content"
+      				  android:layout_width="match_parent"
+       				  android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                    <FrameLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="7dp"
+                            >
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="热门漫画"
+                                android:textColor="#db332c"
+                                android:layout_marginLeft="7dp"
+                                android:textSize="16sp"/>
+
+                        <LinearLayout
+                                android:id="@+id/ll_hotbook_showmore"
+                                android:layout_width="100dp"
+                                android:layout_height="fill_parent"
+                                android:layout_gravity="right|center_vertical"
+                                android:layout_marginRight="10dp"
+                                android:gravity="right">
+
+                            <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:gravity="center"
+                                    android:clickable="false"
+                                    android:background="@drawable/ch_book_play"/>
+                        </LinearLayout>
+                    </FrameLayout>
+
+                    <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="2dp">
+
+                        <LinearLayout
+                                android:id="@+id/ll_hotred_1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                            <com.ch.mhy.widget.ScaleLinearLayout
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:gravity="center"
+                                    test:aspectRatio="1.0"
+                                    test:aspectRatioBase="0">
+
+                                   <ImageView
+                                        android:id="@+id/iv_hot_show1"
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="fill_parent"
+                                        android:scaleType="matrix"
+                                        android:background="@drawable/ch_image_mobg2"
+                                        />
+                            </com.ch.mhy.widget.ScaleLinearLayout>
+
+
+                            <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                     android:layout_marginTop="-5dp"
+                                    android:background="@drawable/ch_book_msg">
+
+                                <TextView
+                                        android:id="@+id/tv_hot_name1"
+                                        android:layout_width="80dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                       android:layout_marginLeft="5dp"
+                                        android:textSize="12sp"/>
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical|right"
+                                        android:layout_margin="2dp"
+                                        android:id="@+id/tv_hottotal_1"
+                                        android:textColor="#afafaf"
+                                       android:textSize="12sp"
+                                        />
+                            </FrameLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:id="@+id/ll_hotred_2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                            <com.ch.mhy.widget.ScaleLinearLayout
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:gravity="center"
+                                    test:aspectRatio="1.0"
+                                    test:aspectRatioBase="0">
+
+                                 <ImageView
+                                        android:id="@+id/iv_hot_show2"
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="fill_parent"
+                                        android:scaleType="matrix"
+                                        android:background="@drawable/ch_image_mobg2"
+                                        />
+                            </com.ch.mhy.widget.ScaleLinearLayout>
+
+
+                            <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="-5dp"
+                                    android:background="@drawable/ch_book_msg">
+
+                                <TextView
+                                        android:id="@+id/tv_hot_name2"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                       android:layout_marginLeft="5dp"
+                                        android:textSize="12sp"/>
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical|right"
+                                        android:layout_margin="2dp"
+                                        android:id="@+id/tv_hottotal_2"
+                                        android:textColor="#afafaf"
+                                        android:textSize="12sp"
+                                        />
+                            </FrameLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:id="@+id/ll_hotred_3"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                            <com.ch.mhy.widget.ScaleLinearLayout
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:gravity="center"
+                                    test:aspectRatio="1.0"
+                                    test:aspectRatioBase="0">
+                                 <ImageView
+                                        android:id="@+id/iv_hot_show3"
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="fill_parent"
+                                        android:scaleType="matrix"
+                                        android:background="@drawable/ch_image_mobg2"
+                                        />
+
+                            </com.ch.mhy.widget.ScaleLinearLayout>
+
+                            <FrameLayout
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                     android:layout_marginTop="-5dp"
+                                    android:background="@drawable/ch_book_msg">
+
+                                <TextView
+                                        android:id="@+id/tv_hot_name3"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginLeft="5dp"
+                                        android:textSize="12sp"/>
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical|right"
+                                        android:layout_margin="2dp"
+                                        android:id="@+id/tv_hottotal_3"
+                                       android:textColor="#afafaf"
+                                       android:textSize="12sp"
+                                        />
+                            </FrameLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="2dp">
+
+                        <LinearLayout
+                                android:id="@+id/ll_hotred_4"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                            <com.ch.mhy.widget.ScaleLinearLayout
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    test:aspectRatio="1.0"
+                                    test:aspectRatioBase="0">
+
+                                <ImageView
+                                        android:id="@+id/iv_hot_show4"
+                                        android:scaleType="matrix"
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="fill_parent"
+                                        android:background="@drawable/ch_image_mobg2"
+                                        />
+                            </com.ch.mhy.widget.ScaleLinearLayout>
+
+                            <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                     android:layout_marginTop="-5dp"
+                                    android:background="@drawable/ch_book_msg">
+
+                                <TextView
+                                        android:id="@+id/tv_hot_name4"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                      android:layout_marginLeft="5dp"
+                                        android:textSize="12sp"/>
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical|right"
+                                        android:layout_margin="2dp"
+                                        android:id="@+id/tv_hottotal_4"
+                                       android:textColor="#afafaf"
+                                       android:textSize="12sp"
+                                        />
+                            </FrameLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:id="@+id/ll_hotred_5"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                            <com.ch.mhy.widget.ScaleLinearLayout
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    test:aspectRatio="1.0"
+                                    test:aspectRatioBase="0">
+
+                                <ImageView
+                                        android:id="@+id/iv_hot_show5"
+                                        android:layout_width="fill_parent"
+                                        android:scaleType="matrix"
+                                        android:layout_height="fill_parent"
+                                        android:background="@drawable/ch_image_mobg2"
+                                        />
+                            </com.ch.mhy.widget.ScaleLinearLayout>
+
+                            <FrameLayout
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                     android:layout_marginTop="-5dp"
+                                    android:background="@drawable/ch_book_msg">
+
+                                <TextView
+                                        android:id="@+id/tv_hot_name5"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginLeft="5dp"
+                                        android:textSize="12sp"/>
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical|right"
+                                        android:layout_margin="2dp"
+                                        android:id="@+id/tv_hottotal_5"
+                                        android:textColor="#afafaf"
+                                        android:textSize="12sp"
+                                        />
+                            </FrameLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:id="@+id/ll_hotred_6"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                            <com.ch.mhy.widget.ScaleLinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    test:aspectRatio="1.0"
+                                    test:aspectRatioBase="0">
+
+                               <ImageView
+                                        android:id="@+id/iv_hot_show6"
+                                        android:scaleType="matrix"
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="fill_parent"
+                                        android:background="@drawable/ch_image_mobg2"
+                                        />
+                            </com.ch.mhy.widget.ScaleLinearLayout>
+
+                            <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                     android:layout_marginTop="-5dp"
+                                    android:background="@drawable/ch_book_msg">
+
+                                <TextView
+                                        android:id="@+id/tv_hot_name6"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginLeft="5dp"
+                                        android:textSize="12sp"/>
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical|right"
+                                        android:layout_margin="2dp"
+                                        android:id="@+id/tv_hottotal_6"
+                                       android:textColor="#afafaf"
+                                       android:textSize="12sp"
+                                       />
+                            </FrameLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:background="#dbdbdb"/>
+
+                <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                    <FrameLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                             android:layout_marginTop="7dp"
+                            >
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="人气新漫"
+                                android:textColor="#db332c"
+                                 android:layout_marginLeft="7dp"
+                                android:textSize="16sp"/>
+
+                        <LinearLayout
+                                android:id="@+id/ll_renqibook_showmore"
+                                android:layout_width="100dp"
+                                android:layout_height="fill_parent"
+                                android:layout_gravity="right|center_vertical"
+                                android:layout_marginRight="10dp"
+                                android:gravity="right">
+
+                            <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:scaleType="fitXY"
+                                    android:clickable="false"
+                                    android:src="@drawable/ch_book_play"/>
+                        </LinearLayout>
+                    </FrameLayout>
+
+                    <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="2dp">
+
+                        <LinearLayout
+                                android:id="@+id/ll_rqred_1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                            <com.ch.mhy.widget.ScaleLinearLayout
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    test:aspectRatio="1.0"
+                                    test:aspectRatioBase="0">
+
+                                <ImageView
+                                        android:id="@+id/iv_rq_show1"
+                                        android:layout_width="fill_parent"
+                                        android:scaleType="matrix"
+                                        android:layout_height="fill_parent"
+                                        android:background="@drawable/ch_image_mobg2"
+                                        />
+                            </com.ch.mhy.widget.ScaleLinearLayout>
+
+                            <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                     android:layout_marginTop="-5dp"
+                                    android:background="@drawable/ch_book_msg">
+
+                                <TextView
+                                        android:id="@+id/tv_rq_name1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                       android:layout_marginLeft="5dp"
+                                        android:textSize="12sp"/>
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical|right"
+                                        android:layout_margin="2dp"
+                                        android:id="@+id/tv_rqtotal_1"
+                                         android:textColor="#afafaf"
+                                       android:textSize="12sp"/>
+                            </FrameLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:id="@+id/ll_rqred_2"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                            <com.ch.mhy.widget.ScaleLinearLayout
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    test:aspectRatio="1.0"
+                                    test:aspectRatioBase="0">
+
+                                <ImageView
+                                        android:id="@+id/iv_rq_show2"
+                                        android:layout_width="fill_parent"
+                                        android:scaleType="matrix"
+                                        android:layout_height="fill_parent"
+                                        android:background="@drawable/ch_image_mobg2"
+                                       />
+                            </com.ch.mhy.widget.ScaleLinearLayout>
+
+                            <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                     android:layout_marginTop="-5dp"
+                                    android:background="@drawable/ch_book_msg">
+
+                                <TextView
+                                        android:id="@+id/tv_rq_name2"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                       android:layout_marginLeft="5dp"
+                                        android:textSize="12sp"/>
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical|right"
+                                        android:layout_margin="2dp"
+                                        android:id="@+id/tv_rqtotal_2"
+                                         android:textColor="#afafaf"
+                                        android:textSize="12sp"/>
+                            </FrameLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:id="@+id/ll_rqred_3"
+                                android:orientation="vertical">
+
+                            <com.ch.mhy.widget.ScaleLinearLayout
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    test:aspectRatio="1.0"
+                                    test:aspectRatioBase="0">
+
+<!--                                  <com.ch.mhy.widget.MyImageView -->
+                                 <ImageView
+                                        android:id="@+id/iv_rq_show3"
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="fill_parent"
+                                        android:scaleType="matrix"
+                                        android:background="@drawable/ch_image_mobg2"
+                                        />
+                                
+                                
+                            </com.ch.mhy.widget.ScaleLinearLayout>
+
+                            <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                     android:layout_marginTop="-5dp"
+                                    android:background="@drawable/ch_book_msg">
+
+                                <TextView
+                                        android:id="@+id/tv_rq_name3"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                       android:layout_marginLeft="5dp"
+                                        android:textSize="12sp"/>
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical|right"
+                                        android:layout_margin="2dp"
+                                        android:id="@+id/tv_rqtotal_3"
+                                         android:textColor="#afafaf"
+                                        android:textSize="12sp"/>
+                            </FrameLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="2dp">
+
+                        <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:id="@+id/ll_rqred_4"
+                                android:orientation="vertical">
+
+                            <com.ch.mhy.widget.ScaleLinearLayout
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    test:aspectRatio="1.0"
+                                    test:aspectRatioBase="0">
+
+                                <ImageView
+                                        android:id="@+id/iv_rq_show4"
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="fill_parent"
+                                        android:scaleType="matrix"
+                                        android:background="@drawable/ch_image_mobg2"
+                                        />
+                            </com.ch.mhy.widget.ScaleLinearLayout>
+
+                            <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                     android:layout_marginTop="-5dp"
+                                    android:background="@drawable/ch_book_msg">
+
+                                <TextView
+                                        android:id="@+id/tv_rq_name4"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginLeft="5dp"
+                                        android:textSize="12sp"/>
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical|right"
+                                        android:layout_margin="2dp"
+                                        android:id="@+id/tv_rqtotal_4"
+                                         android:textColor="#afafaf"
+                                        android:textSize="12sp"/>
+                            </FrameLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:id="@+id/ll_rqred_5"
+                                android:orientation="vertical">
+
+                            <com.ch.mhy.widget.ScaleLinearLayout
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    test:aspectRatio="1.0"
+                                    test:aspectRatioBase="0">
+
+                                <ImageView
+                                        android:id="@+id/iv_rq_show5"
+                                        android:scaleType="matrix"
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="fill_parent"
+                                        android:background="@drawable/ch_image_mobg2"
+                                        />
+                            </com.ch.mhy.widget.ScaleLinearLayout>
+
+                            <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                     android:layout_marginTop="-5dp"
+                                    android:background="@drawable/ch_book_msg">
+
+                                <TextView
+                                        android:id="@+id/tv_rq_name5"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                       android:layout_marginLeft="5dp"
+                                        android:textSize="12sp"/>
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical|right"
+                                        android:layout_margin="2dp"
+                                        android:id="@+id/tv_rqtotal_5"
+                                         android:textColor="#afafaf"
+                                        android:textSize="12sp"/>
+                            </FrameLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:id="@+id/ll_rqred_6"
+                                android:orientation="vertical">
+
+                            <com.ch.mhy.widget.ScaleLinearLayout
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    test:aspectRatio="1.0"
+                                    test:aspectRatioBase="0">
+
+                                <ImageView
+                                        android:id="@+id/iv_rq_show6"
+                                        android:layout_width="fill_parent"
+                                        android:scaleType="matrix"
+                                        android:layout_height="fill_parent"
+                                        android:background="@drawable/ch_image_mobg2"
+                                        />
+                            </com.ch.mhy.widget.ScaleLinearLayout>
+
+                            <FrameLayout
+                                    android:layout_width="wrap_content"
+                                     android:layout_marginTop="-5dp"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/ch_book_msg">
+
+                                <TextView
+                                        android:id="@+id/tv_rq_name6"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                       android:layout_marginLeft="5dp"
+                                        android:textSize="12sp"/>
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical|right"
+                                        android:layout_margin="2dp"
+                                        android:id="@+id/tv_rqtotal_6"
+                                         android:textColor="#afafaf"
+                                        android:textSize="12sp"/>
+                            </FrameLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:background="#dbdbdb"/>
+
+                <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                    <FrameLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                             android:layout_marginTop="7dp"
+                            >
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="完结优漫"
+                                android:textColor="#db332c"
+                                android:layout_marginLeft="7dp"
+                                android:textSize="16sp"/>
+
+                        <LinearLayout
+                                android:id="@+id/ll_downbook_showmore"
+                                android:layout_width="100dp"
+                                android:layout_height="fill_parent"
+                                android:layout_gravity="right|center_vertical"
+                                android:layout_marginRight="10dp"
+                                android:gravity="right">
+
+                            <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:scaleType="fitXY"
+                                    android:clickable="false"
+                                    android:src="@drawable/ch_book_play"/>
+                        </LinearLayout>
+                    </FrameLayout>
+
+                    <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="2dp">
+
+                        <LinearLayout
+                                android:id="@+id/ll_downred_1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                            <com.ch.mhy.widget.ScaleLinearLayout
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    test:aspectRatio="1.0"
+                                    test:aspectRatioBase="0">
+
+                                <ImageView
+                                        android:id="@+id/iv_down_show1"
+                                        android:layout_width="fill_parent"
+                                        android:scaleType="matrix"
+                                        android:layout_height="fill_parent"
+                                        android:background="@drawable/ch_image_mobg2"
+                                        />
+                            </com.ch.mhy.widget.ScaleLinearLayout>
+
+                            <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                     android:layout_marginTop="-5dp"
+                                    android:background="@drawable/ch_book_msg">
+
+                                <TextView
+                                        android:id="@+id/tv_down_name1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                       android:layout_marginLeft="5dp"
+                                        android:textSize="12sp"/>
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical|right"
+                                        android:layout_margin="2dp"
+                                        android:id="@+id/tv_downtotal_1"
+                                        android:textColor="#afafaf"
+                                        android:textSize="12sp"/>
+                            </FrameLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:id="@+id/ll_downred_2"
+                                android:orientation="vertical">
+
+
+                            <com.ch.mhy.widget.ScaleLinearLayout
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    test:aspectRatio="1.0"
+                                    test:aspectRatioBase="0">
+
+                                <ImageView
+                                        android:id="@+id/iv_down_show2"
+                                        android:layout_width="fill_parent"
+                                        android:scaleType="matrix"
+                                        android:layout_height="fill_parent"
+                                        android:background="@drawable/ch_image_mobg2"
+                                        />
+                            </com.ch.mhy.widget.ScaleLinearLayout>
+
+                            <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                     android:layout_marginTop="-5dp"
+                                    android:background="@drawable/ch_book_msg">
+
+                                <TextView
+                                        android:id="@+id/tv_down_name2"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginLeft="5dp"
+                                        android:textSize="12sp"/>
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical|right"
+                                        android:layout_margin="2dp"
+                                        android:id="@+id/tv_downtotal_2"
+                                         android:textColor="#afafaf"
+                                       android:textSize="12sp"/>
+                            </FrameLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:id="@+id/ll_downred_3"
+                                android:orientation="vertical">
+
+
+                            <com.ch.mhy.widget.ScaleLinearLayout
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    test:aspectRatio="1.0"
+                                    test:aspectRatioBase="0">
+
+                                <ImageView
+                                        android:id="@+id/iv_down_show3"
+                                        android:scaleType="matrix"
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="fill_parent"
+                                        android:background="@drawable/ch_image_mobg2"
+                                       />
+                            </com.ch.mhy.widget.ScaleLinearLayout>
+
+                            <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                     android:layout_marginTop="-5dp"
+                                    android:background="@drawable/ch_book_msg">
+
+                                <TextView
+                                        android:id="@+id/tv_down_name3"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                       android:layout_marginLeft="5dp"
+                                        android:textSize="12sp"/>
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical|right"
+                                        android:layout_margin="2dp"
+                                        android:id="@+id/tv_downtotal_3"
+                                         android:textColor="#afafaf"
+                                        android:textSize="12sp"/>
+                            </FrameLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="2dp">
+
+                        <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:id="@+id/ll_downred_4"
+                                android:orientation="vertical">
+
+
+                            <com.ch.mhy.widget.ScaleLinearLayout
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    test:aspectRatio="1.0"
+                                    test:aspectRatioBase="0">
+
+                                <ImageView
+                                        android:id="@+id/iv_down_show4"
+                                        android:layout_width="fill_parent"
+                                        android:scaleType="matrix"
+                                        android:layout_height="fill_parent"
+                                        android:background="@drawable/ch_image_mobg2"
+                                        />
+                            </com.ch.mhy.widget.ScaleLinearLayout>
+
+                            <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                     android:layout_marginTop="-5dp"
+                                    android:background="@drawable/ch_book_msg">
+
+                                <TextView
+                                        android:id="@+id/tv_down_name4"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginLeft="5dp"
+                                        android:textSize="12sp"/>
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical|right"
+                                        android:layout_margin="2dp"
+                                        android:id="@+id/tv_downtotal_4"
+                                         android:textColor="#afafaf"
+                                       android:textSize="12sp"/>
+                            </FrameLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:id="@+id/ll_downred_5"
+                                android:orientation="vertical">
+
+                            <com.ch.mhy.widget.ScaleLinearLayout
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    test:aspectRatio="1.0"
+                                    test:aspectRatioBase="0">
+
+                                <ImageView
+                                        android:id="@+id/iv_down_show5"
+                                        android:layout_width="fill_parent"
+                                        android:scaleType="matrix"
+                                        android:layout_height="fill_parent"
+                                        android:background="@drawable/ch_image_mobg2"
+                                        />
+                            </com.ch.mhy.widget.ScaleLinearLayout>
+
+                            <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                     android:layout_marginTop="-5dp"
+                                    android:background="@drawable/ch_book_msg">
+
+                                <TextView
+                                        android:id="@+id/tv_down_name5"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                       android:layout_marginLeft="5dp"
+                                        android:textSize="12sp"/>
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical|right"
+                                        android:layout_margin="2dp"
+                                        android:id="@+id/tv_downtotal_5"
+                                         android:textColor="#afafaf"
+                                        android:textSize="12sp"/>
+                            </FrameLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:id="@+id/ll_downred_6"
+                                android:orientation="vertical">
+
+                            <com.ch.mhy.widget.ScaleLinearLayout
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    test:aspectRatio="1.0"
+                                    test:aspectRatioBase="0">
+
+                                <ImageView
+                                        android:id="@+id/iv_down_show6"
+                                        android:scaleType="matrix"
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="fill_parent"
+                                        android:background="@drawable/ch_image_mobg2"
+                                        />
+                            </com.ch.mhy.widget.ScaleLinearLayout>
+
+                            <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                     android:layout_marginTop="-5dp"
+                                    android:background="@drawable/ch_book_msg">
+
+                                <TextView
+                                        android:id="@+id/tv_down_name6"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginLeft="5dp"
+                                        android:textSize="12sp"/>
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical|right"
+                                        android:layout_margin="2dp"
+                                        android:id="@+id/tv_downtotal_6"
+                                         android:textColor="#afafaf"
+                                        android:textSize="12sp"/>
+                            </FrameLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </com.ch.mhy.widget.MyScrollView2>
+        
+        <LinearLayout 
+            android:id="@+id/ll_getnet"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:visibility="gone"
+            android:orientation="vertical"
+            >
+            <LinearLayout 
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.8"
+                android:gravity="center"
+                >
+                <TextView 
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                     android:text="@string/nonet_info_show"
+                    android:textColor="#000000"
+                    />
+            </LinearLayout>
+            <LinearLayout 
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                >
+                <ImageView 
+                    android:id="@+id/btn_getnet"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                android:padding="10dp"
+                 android:src="@drawable/btn_getnetbg"
+                />
+            </LinearLayout>
+            
+            
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>

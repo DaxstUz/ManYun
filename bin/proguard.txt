@@ -1,0 +1,325 @@
+# view res/layout/activity_main.xml #generated:18
+-keep class android.support.v4.app.FragmentTabHost { <init>(...); }
+
+# view res/layout/activity_guid.xml #generated:5
+# view res/layout/activity_my_msg.xml #generated:141
+-keep class android.support.v4.view.ViewPager { <init>(...); }
+
+# view AndroidManifest.xml #generated:54
+-keep class com.ch.mhy.GuideActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:66
+-keep class com.ch.mhy.MainActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:123
+-keep class com.ch.mhy.activity.book.DownSelectActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:118
+-keep class com.ch.mhy.activity.book.ReadingActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:115
+-keep class com.ch.mhy.activity.book.ShowDetailActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:112
+-keep class com.ch.mhy.activity.cate.ShowBooksActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:126
+-keep class com.ch.mhy.activity.comment.CommentActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:130
+-keep class com.ch.mhy.activity.comment.CommentDetailActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:143
+-keep class com.ch.mhy.activity.demo.DemoScrollContainListActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:147
+-keep class com.ch.mhy.activity.msg.UpdateComicActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:104
+-keep class com.ch.mhy.activity.my.AboutUsActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:92
+-keep class com.ch.mhy.activity.my.CleanCash { <init>(...); }
+
+# view AndroidManifest.xml #generated:71
+-keep class com.ch.mhy.activity.my.CollectActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:95
+-keep class com.ch.mhy.activity.my.DownLoadSet { <init>(...); }
+
+# view AndroidManifest.xml #generated:98
+-keep class com.ch.mhy.activity.my.DownShowActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:101
+-keep class com.ch.mhy.activity.my.GeneralsettingActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:89
+-keep class com.ch.mhy.activity.my.HistoryShow { <init>(...); }
+
+# view AndroidManifest.xml #generated:74
+-keep class com.ch.mhy.activity.my.LoginActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:77
+-keep class com.ch.mhy.activity.my.MyMsgActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:83
+-keep class com.ch.mhy.activity.my.PersonReturn { <init>(...); }
+
+# view AndroidManifest.xml #generated:107
+-keep class com.ch.mhy.activity.my.ToWorkActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:80
+-keep class com.ch.mhy.activity.my.UnLoginActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:86
+-keep class com.ch.mhy.activity.my.WonRecActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:139
+-keep class com.ch.mhy.activity.serarch.ResultActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:136
+-keep class com.ch.mhy.activity.serarch.SearchActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:47
+-keep class com.ch.mhy.application.MhyApplication { <init>(...); }
+
+# view AndroidManifest.xml #generated:153
+-keep class com.ch.mhy.net.NetReceiver { <init>(...); }
+
+# view res/layout/activity_downmore.xml #generated:96
+-keep class com.ch.mhy.pulltorefresh.PullableGridView { <init>(...); }
+
+# view res/layout/activity_comment.xml #generated:70
+# view res/layout/activity_comment_detail.xml #generated:287
+# view res/layout/activity_searchresult.xml #generated:44
+# view res/layout/activity_showbooks.xml #generated:40
+# view res/layout/activity_update_comic.xml #generated:41
+# view res/layout/fragment_auth.xml #generated:26
+# view res/layout/fragment_ijoin.xml #generated:6
+# view res/layout/fragment_isay.xml #generated:7
+-keep class com.ch.mhy.pulltorefresh.SingleLayoutListView { <init>(...); }
+
+# view AndroidManifest.xml #generated:151
+-keep class com.ch.mhy.service.DownAPKService { <init>(...); }
+
+# view AndroidManifest.xml #generated:150
+-keep class com.ch.mhy.service.DownComicService { <init>(...); }
+
+# view AndroidManifest.xml #generated:157
+-keep class com.ch.mhy.service.MessageService { <init>(...); }
+
+# view AndroidManifest.xml #generated:155
+-keep class com.ch.mhy.service.NetStateChangeService { <init>(...); }
+
+# view res/layout/ad_cycle_view.xml #generated:6
+# view res/layout/view_cycle_viewpager_contet.xml #generated:12
+-keep class com.ch.mhy.viewpager.BaseViewPager { <init>(...); }
+
+# view res/layout/fragment_book.xml #generated:73
+-keep class com.ch.mhy.viewpager.CycleViewPager { <init>(...); }
+
+# view res/layout/activity_showdetail.xml #generated:311
+-keep class com.ch.mhy.widget.ChGridView { <init>(...); }
+
+# view res/layout/activity_comment_detail.xml #generated:221
+-keep class com.ch.mhy.widget.ChHorizontalScrollView { <init>(...); }
+
+# view res/layout/activity_historyshow.xml #generated:103
+# view res/layout/activity_historyshow.xml #generated:75
+# view res/layout/activity_showdetail.xml #generated:252
+-keep class com.ch.mhy.widget.ChScrollView { <init>(...); }
+
+# view res/layout/activity_comment_detail.xml #generated:71
+# view res/layout/activity_unlogin.xml #generated:79
+# view res/layout/comment_item.xml #generated:19
+# view res/layout/comment_ok_user_item.xml #generated:9
+# view res/layout/comment_reply_item.xml #generated:26
+# view res/layout/fragment_my.xml #generated:66
+-keep class com.ch.mhy.widget.CircleImageView { <init>(...); }
+
+# view res/layout/activity_historyshow.xml #generated:109
+# view res/layout/activity_historyshow.xml #generated:82
+-keep class com.ch.mhy.widget.FeedBackListView { <init>(...); }
+
+# view res/layout/activity_reading.xml #generated:16
+-keep class com.ch.mhy.widget.ImageCycleView2 { <init>(...); }
+
+# view res/layout/fragment_book.xml #generated:52
+-keep class com.ch.mhy.widget.MyScrollView2 { <init>(...); }
+
+# view res/layout/ad_cycle_view2.xml #generated:11
+-keep class com.ch.mhy.widget.MyViewPager { <init>(...); }
+
+# view res/layout/activity_personreturn.xml #generated:103
+-keep class com.ch.mhy.widget.RadioGroup { <init>(...); }
+
+# view res/layout/adapter__readed_item.xml #generated:32
+# view res/layout/adapter_authorbookslist_item.xml #generated:13
+# view res/layout/adapter_authorlist_item.xml #generated:14
+# view res/layout/adapter_collect_item.xml #generated:33
+# view res/layout/adapter_downbook_item.xml #generated:30
+# view res/layout/adapter_searchresult_item.xml #generated:17
+# view res/layout/fragment_book.xml #generated:1001
+# view res/layout/fragment_book.xml #generated:1061
+# view res/layout/fragment_book.xml #generated:1114
+# view res/layout/fragment_book.xml #generated:1167
+# view res/layout/fragment_book.xml #generated:130
+# view res/layout/fragment_book.xml #generated:185
+# view res/layout/fragment_book.xml #generated:240
+# view res/layout/fragment_book.xml #generated:300
+# view res/layout/fragment_book.xml #generated:354
+# view res/layout/fragment_book.xml #generated:408
+# view res/layout/fragment_book.xml #generated:514
+# view res/layout/fragment_book.xml #generated:567
+# view res/layout/fragment_book.xml #generated:620
+# view res/layout/fragment_book.xml #generated:682
+# view res/layout/fragment_book.xml #generated:735
+# view res/layout/fragment_book.xml #generated:788
+# view res/layout/fragment_book.xml #generated:893
+# view res/layout/fragment_book.xml #generated:947
+# view res/layout/fragment_book_search.xml #generated:187
+# view res/layout/fragment_book_search.xml #generated:220
+# view res/layout/fragment_book_search.xml #generated:251
+# view res/layout/fragment_book_search.xml #generated:289
+# view res/layout/fragment_book_search.xml #generated:320
+# view res/layout/fragment_book_search.xml #generated:351
+# view res/layout/night_item.xml #generated:9
+-keep class com.ch.mhy.widget.ScaleLinearLayout { <init>(...); }
+
+# view AndroidManifest.xml #generated:190
+-keep class com.ch.mhy.wxapi.WXEntryActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:185
+-keep class com.tencent.connect.common.AssistActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:172
+-keep class com.tencent.tauth.AuthActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:232
+-keep class com.umeng.message.BootBroadcastReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:217
+-keep class com.umeng.message.ElectionReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:210
+-keep class com.umeng.message.MessageReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:191
+-keep class com.umeng.message.NotificationProxyBroadcastReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:225
+-keep class com.umeng.message.RegistrationReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:196
+-keep class com.umeng.message.SystemReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:255
+-keep class com.umeng.message.UmengIntentService { <init>(...); }
+
+# view AndroidManifest.xml #generated:258
+-keep class com.umeng.message.UmengMessageIntentReceiverService { <init>(...); }
+
+# view AndroidManifest.xml #generated:238
+-keep class com.umeng.message.UmengService { <init>(...); }
+
+# view AndroidManifest.xml #generated:162
+-keep class com.umeng.socialize.view.ShareActivity { <init>(...); }
+
+# view res/layout/umeng_socialize_post_share.xml #generated:2
+# view sw550dp-large-v13\res/layout-sw550dp-large-v13/umeng_socialize_post_share.xml #generated:2
+-keep class com.umeng.socialize.view.wigets.KeyboardListenRelativeLayout { <init>(...); }
+
+# view res/layout/umeng_socialize_at_view.xml #generated:21
+-keep class com.umeng.socialize.view.wigets.SearchBox { <init>(...); }
+
+# view res/layout/umeng_socialize_at_view.xml #generated:38
+-keep class com.umeng.socialize.view.wigets.SectionListView { <init>(...); }
+
+# view res/layout/umeng_socialize_at_view.xml #generated:47
+-keep class com.umeng.socialize.view.wigets.SlideBar { <init>(...); }
+
+# view AndroidManifest.xml #generated:276
+-keep class com.umeng.update.UpdateDialogActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:271
+-keep class com.umeng.update.net.DownloadingService { <init>(...); }
+
+# onClick res/layout/activity__collect.xml #generated:14
+# onClick res/layout/activity__collect.xml #generated:38
+# onClick res/layout/activity__collect.xml #generated:48
+# onClick res/layout/activity__collect.xml #generated:57
+# onClick res/layout/activity__collect.xml #generated:67
+# onClick res/layout/activity_aboutus.xml #generated:20
+# onClick res/layout/activity_cleancash.xml #generated:21
+# onClick res/layout/activity_cleancash.xml #generated:29
+# onClick res/layout/activity_comment.xml #generated:28
+# onClick res/layout/activity_comment_detail.xml #generated:27
+# onClick res/layout/activity_downmore.xml #generated:163
+# onClick res/layout/activity_downmore.xml #generated:176
+# onClick res/layout/activity_downmore.xml #generated:22
+# onClick res/layout/activity_downmore.xml #generated:36
+# onClick res/layout/activity_downmore.xml #generated:86
+# onClick res/layout/activity_downset.xml #generated:21
+# onClick res/layout/activity_downset.xml #generated:29
+# onClick res/layout/activity_downshow.xml #generated:117
+# onClick res/layout/activity_downshow.xml #generated:137
+# onClick res/layout/activity_downshow.xml #generated:168
+# onClick res/layout/activity_downshow.xml #generated:181
+# onClick res/layout/activity_downshow.xml #generated:23
+# onClick res/layout/activity_downshow.xml #generated:43
+# onClick res/layout/activity_downshow.xml #generated:76
+# onClick res/layout/activity_downshow.xml #generated:97
+# onClick res/layout/activity_generalsetting.xml #generated:172
+# onClick res/layout/activity_generalsetting.xml #generated:21
+# onClick res/layout/activity_generalsetting.xml #generated:220
+# onClick res/layout/activity_generalsetting.xml #generated:266
+# onClick res/layout/activity_generalsetting.xml #generated:312
+# onClick res/layout/activity_generalsetting.xml #generated:357
+# onClick res/layout/activity_historyshow.xml #generated:16
+# onClick res/layout/activity_login.xml #generated:22
+# onClick res/layout/activity_login.xml #generated:48
+# onClick res/layout/activity_login.xml #generated:74
+# onClick res/layout/activity_my_msg.xml #generated:109
+# onClick res/layout/activity_my_msg.xml #generated:22
+# onClick res/layout/activity_my_msg.xml #generated:83
+# onClick res/layout/activity_operate.xml #generated:115
+# onClick res/layout/activity_operate.xml #generated:13
+# onClick res/layout/activity_operate.xml #generated:131
+# onClick res/layout/activity_operate.xml #generated:147
+# onClick res/layout/activity_operate.xml #generated:37
+# onClick res/layout/activity_operate.xml #generated:54
+# onClick res/layout/activity_personreturn.xml #generated:23
+# onClick res/layout/activity_personreturn.xml #generated:337
+# onClick res/layout/activity_personreturn.xml #generated:54
+# onClick res/layout/activity_reading.xml #generated:7
+# onClick res/layout/activity_search.xml #generated:119
+# onClick res/layout/activity_search.xml #generated:20
+# onClick res/layout/activity_search.xml #generated:68
+# onClick res/layout/activity_search.xml #generated:79
+# onClick res/layout/activity_search.xml #generated:87
+# onClick res/layout/activity_searchresult.xml #generated:22
+# onClick res/layout/activity_searchresult.xml #generated:60
+# onClick res/layout/activity_showbooks.xml #generated:22
+# onClick res/layout/activity_showdetail.xml #generated:129
+# onClick res/layout/activity_showdetail.xml #generated:176
+# onClick res/layout/activity_showdetail.xml #generated:189
+# onClick res/layout/activity_showdetail.xml #generated:19
+# onClick res/layout/activity_showdetail.xml #generated:222
+# onClick res/layout/activity_showdetail.xml #generated:236
+# onClick res/layout/activity_showdetail.xml #generated:268
+# onClick res/layout/activity_showdetail.xml #generated:300
+# onClick res/layout/activity_showdetail.xml #generated:45
+# onClick res/layout/activity_towrok.xml #generated:20
+# onClick res/layout/activity_unlogin.xml #generated:137
+# onClick res/layout/activity_unlogin.xml #generated:20
+# onClick res/layout/activity_unlogin.xml #generated:47
+# onClick res/layout/activity_update_comic.xml #generated:23
+# onClick res/layout/dialog_share.xml #generated:6
+# onClick res/layout/fragment_cate.xml #generated:40
+# onClick res/layout/fragment_cate.xml #generated:51
+# onClick res/layout/fragment_cate.xml #generated:61
+# onClick res/layout/fragment_my.xml #generated:423
+# onClick res/layout/fragment_my.xml #generated:467
+# onClick res/layout/fragment_my.xml #generated:510
+-keepclassmembers class * { *** onclick(...); }
+

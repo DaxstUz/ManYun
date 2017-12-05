@@ -1,0 +1,125 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.12.+'
+    }
+}
+apply plugin: 'android'
+
+dependencies {
+    compile fileTree(dir: 'libs', include: '*.jar')
+}
+
+android {
+    compileSdkVersion 14
+    buildToolsVersion "21.1.2"
+    
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            resources.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+        }
+
+        // Move the tests to tests/java, tests/res, etc...
+        instrumentTest.setRoot('tests')
+
+        // Move the build types to build-types/<type>
+        // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
+        // This moves them out of them default location under src/<type>/... which would
+        // conflict with src/ being used by the main source set.
+        // Adding new build types or product flavors should be accompanied
+        // by a similar customization.
+        debug.setRoot('build-types/debug')
+        release.setRoot('build-types/release')
+  } 
+ 
+  lintOptions {  
+     abortOnError false  
+   } 
+   
+   
+   signingConfigs {  
+  		 myConfig {  
+       		 //绝对路径和相对路径都可以  
+        		 storeFile file("F:\\manyun.keystore")  
+        		 storePassword "caohua123"  
+                 keyAlias "manyun"  
+                 keyPassword "manyun123"  
+         }  
+   }  
+   
+   
+      buildTypes{ 
+    	  release {  
+           // shrinkResources true // 是否去除无效的资源文件
+      		//1.添加签名  
+      		signingConfig  signingConfigs.myConfig  
+      		//2.runProguard 执行混淆代码  
+      		runProguard true  
+      		//混淆规则文件  
+       		proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'  
+      		}  
+	 } 
+	 
+	 //添加了上述代码之后，打出了已经签名的apk：其中xxx-release-unaligned.apk是签名为进行zipAligned优化的包  
+   //xxx-release.apk是签名和zipAlign优化过的包  
+   //添加混淆代码的执行代码如上第二步，就可以实现打出混淆包  
+     
+   //下面的代码开始打批量包  
+ 
+ productFlavors {  
+ 
+  		 XiaoMi {  
+            manifestPlaceholders = [ CHANNEL_NAME:"XiaoMi" ]  
+        }  
+       BaiDu {  
+           manifestPlaceholders = [ CHANNEL_NAME:"BaiDu" ]  
+       } 
+        YingYongBao {  
+            manifestPlaceholders = [ CHANNEL_NAME:"YingYongBao"]  
+        }  
+        manhuayun {  
+            manifestPlaceholders = [ CHANNEL_NAME:"manhuayun" ]  
+        }  
+        WanDouJia {  
+            manifestPlaceholders = [ CHANNEL_NAME:"WanDouJia" ]  
+        }  
+        SouGou {  
+            manifestPlaceholders = [ CHANNEL_NAME:"SouGou" ]  
+        }  
+        JiFeng {  
+            manifestPlaceholders = [ CHANNEL_NAME:"JiFeng" ]  
+        }  
+        MuMaYi {  
+            manifestPlaceholders = [ CHANNEL_NAME:"MuMaYi" ]  
+        }  
+        LeShop {  
+            manifestPlaceholders = [ CHANNEL_NAME:"LeShop" ]  
+        }  
+        WoShop {  
+            manifestPlaceholders = [ CHANNEL_NAME:"WoShop" ]  
+        }  
+        HuaWei {  
+            manifestPlaceholders = [ CHANNEL_NAME:"HuaWei" ]  
+        }  
+    } 
+    
+   
+    
+     //通过以下方式是批量的设置  
+ 	productFlavors.all { 
+ 		flavor ->flavor.manifestPlaceholders = [ UMENG_CHANNEL_VALUE:name ]  
+    }
+ 
+}
+
+
+tasks.withType(Compile) { options.encoding = "UTF-8" }  
+

@@ -1,0 +1,100 @@
+# To enable ProGuard in your project, edit project.properties
+# to define the proguard.config property as described in that file.
+#
+# Add project specific ProGuard rules here.
+# By default, the flags in this file are appended to flags specified
+# in ${sdk.dir}/tools/proguard/proguard-android.txt
+# You can edit the include path and order by changing the ProGuard
+# include property in project.properties.
+#
+# For more details, see
+#   http://developer.android.com/guide/developing/tools/proguard.html
+
+# Add any project specific keep options here:
+
+# If your project uses WebView with JS, uncomment the following
+# and specify the fully qualified class name to the JavaScript interface
+# class:
+-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+   public *;
+}
+
+-keepclassmembers class * {
+   public <init>(org.json.JSONObject);
+}
+
+####################universal-image-loader########  
+-libraryjars libs/universal-image-loader-1.9.2-SNAPSHOT-with-sources.jar  
+-keep class com.nostra13.universalimageloader.** {*;}  
+-dontwarn com.nostra13.universalimageloader.** 
+
+  ####################OkHttp########  
+-libraryjars libs/okhttp-2.5.0-20150724.184632-20.jar  
+-keep class com.squareup.okhttp.** {*;}  
+-dontwarn com.squareup.okhttp.** 
+
+  ####################okio########  
+-libraryjars libs/okio-1.5.0.jar  
+-keep class okio.*  
+-dontwarn okio.*
+
+  ####################SocialSDK_WeiXin_1########  
+-libraryjars libs/SocialSDK_WeiXin_1.jar  
+-libraryjars libs/SocialSDK_WeiXin_2.jar  
+-keep class com.tencent.mm.*  
+-dontwarn com.tencent.mm.*
+-keep class com.umeng.socialize.weixin.*  
+-dontwarn com.umeng.socialize.weixin.*
+
+  ####################umeng_social_sdk########  
+-dontshrink
+-dontoptimize
+-dontwarn com.google.android.maps.**
+-dontwarn android.webkit.WebView
+-dontwarn com.umeng.**
+-dontwarn com.tencent.weibo.sdk.**
+-dontwarn com.facebook.**
+-libraryjars libs/SocialSDK_QQZone_2.jar
+-keep enum com.facebook.**
+-keepattributes Exceptions,InnerClasses,Signature
+-keepattributes *Annotation*
+-keepattributes SourceFile,LineNumberTable
+-keep public interface com.facebook.**
+-keep public interface com.tencent.**
+-keep public interface com.umeng.socialize.**
+-keep public interface com.umeng.socialize.sensor.**
+-keep public interface com.umeng.scrshot.**
+-keep public class com.umeng.socialize.* {*;}
+-keep public class javax.**
+-keep public class android.webkit.**
+-keep class com.facebook.**
+-keep class com.umeng.scrshot.**
+-keep public class com.tencent.** {*;}
+-keep class com.umeng.socialize.sensor.**
+-keep class com.tencent.mm.sdk.modelmsg.WXMediaMessage {*;}
+-keep class com.tencent.mm.sdk.modelmsg.** implements com.tencent.mm.sdk.modelmsg.WXMediaMessage$IMediaObject {*;}
+-keep class im.yixin.sdk.api.YXMessage {*;}
+-keep class im.yixin.sdk.api.** implements im.yixin.sdk.api.YXMessage$YXMessageData{*;}
+-keep public class com.ch.mhy.R$*{
+    public static final int *;
+}
+
+-keep public class com.ch.mhy.entity.**{*;}
+#-keep public class com.ch.mhy.activity.comment.**{*;}
+#-keepclasseswithmembernames class com.ch.comm.resquest.**{*;}
+
+#360
+#-libraryjars libs/qhgm_ad_v1.1.0.pro.jar
+#-keep class com.qihoo.** {*;}  
+#-dontwarn com.qihoo.** 
+#-dontwarn **CompatHoneycomb
+#-keepattributes *Annotation*
+#-keepattributes JavascriptInterface
+#-keep class com.qihoo.gamead.ui.webview.ClientCallWebViewInterface {
+#    public *;
+#}
+#-keep class com.qihoo.gamead.ui.webview.WebViewCallClientInterface {
+ #   public *;
+#}
+#-keep class android.support.v4.** {*;}
+

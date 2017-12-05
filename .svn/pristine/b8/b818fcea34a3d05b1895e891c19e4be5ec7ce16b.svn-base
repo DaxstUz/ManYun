@@ -1,0 +1,12 @@
+package com.ch.mhy.listener;
+
+public interface Add {
+	public void start(String url); //开启加载动画
+	public void stop();
+	public void getNewData(String order);
+	
+	/**
+	 * 更新当前阅读的页码
+	 */
+	public void updateIndex();
+}

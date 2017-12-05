@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#000000" >
+
+        <TextView
+            android:textColor="#ffffff"
+            android:id="@+id/tv_show_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:gravity="center" >
+
+        </TextView>
+        
+        <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="fill_parent"
+                android:id="@+id/ll_my_edit"
+                android:onClick="onclick"
+                android:layout_gravity="right"
+                android:gravity="center"
+                >
+
+            <TextView
+                	android:id="@+id/tv_my_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ch_about_edit"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/edit"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="#dbdbdb"
+                    />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_return_back"
+            android:layout_width="70dp"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:onClick="onclick" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ch_back"
+                android:gravity="center" />
+        </LinearLayout>        
+    </FrameLayout>
+    
+    <ListView 
+        android:id="@+id/lv_downshow"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        ></ListView>
+    
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#dbdbdb"
+        >
+        <LinearLayout 
+            android:id="@+id/ll_down_start"
+            android:onClick="onclick"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            >
+            <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/down_start"
+                android:layout_margin="2dp"
+                />
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/down_start"
+                android:textColor="@drawable/down_textcolor"
+                />
+        </LinearLayout>
+        <LinearLayout 
+            android:id="@+id/ll_down_stop"
+            android:onClick="onclick"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            >
+            
+             <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/down_stop"
+                />
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/down_stop"
+                 android:textColor="@drawable/down_textcolor"
+                />
+        </LinearLayout>
+        <LinearLayout 
+            android:id="@+id/ll_down_add"
+            android:onClick="onclick"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            >
+             <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/down_add"
+                />
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/down_add"
+                 android:textColor="@drawable/down_textcolor"
+                />
+        </LinearLayout>
+        <LinearLayout 
+            android:id="@+id/ll_read_start"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:onClick="onclick"
+            android:orientation="horizontal"
+            >
+            <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/list"
+                />
+            <TextView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/down_list"
+                 android:textColor="@drawable/down_textcolor"
+                />
+        </LinearLayout>
+        
+    </LinearLayout>
+
+</LinearLayout>

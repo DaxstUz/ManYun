@@ -1,0 +1,444 @@
+package com.ch.mhy.fragment;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
+import android.os.Bundle;
+import android.os.Environment;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+
+import com.ch.mhy.R;
+import com.ch.mhy.activity.my.DownShowActivity;
+import com.ch.mhy.adapter.DownBookAdapter;
+import com.ch.mhy.db.DBManager;
+import com.ch.mhy.db.DBUtil;
+import com.ch.mhy.entity.Down;
+import com.ch.mhy.entity.DownListData;
+import com.ch.mhy.interf.UpdateDownShow;
+import com.ch.mhy.util.FileUtil;
+import com.ch.mhy.util.Utils;
+
+/**
+ * 下载碎片
+ *
+ * @author DaxstUz 2416738717 2015年5月6日
+ */
+public class DownloadFragment extends Fragment  implements UpdateDownShow{
+	public static DownloadFragment instance;
+	
+    private ListView lv_down_show;
+    
+    private DBManager manager;
+    
+    private List<DownListData> listComics=new ArrayList<DownListData>();//有多少部漫画正在下载\等待下载\已经下载完
+    
+    private DownBookAdapter adapter;
+    
+    private Toast toast;
+    
+    private boolean getDownList(List<DownListData> tempList,String mid){
+    	boolean flag = false;
+    	for(DownListData down:tempList){
+    		if(down.getmId().toString().equals(mid)){
+    			flag = true;
+    			break;
+    		}
+    	}
+    	return flag;
+    }
+    public void setState(String mId,String state,String total){
+    	
+    	for (DownListData downListData : listComics) {
+			if(mId.equals(downListData.getmId().toString())){
+				downListData.setStatus(state);
+				downListData.setTotal(total);
+				break;
+			}
+		}
+    	adapter.notifyDataSetChanged();
+    }
+    
+    
+    View view;
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+    	instance = this;
+        view = inflater.inflate(R.layout.fragment_download, null);
+        manager = new DBManager(DownloadFragment.this.getActivity(), DBUtil.ReadName, null, DBUtil.Code);
+        lv_down_show = (ListView) view.findViewById(R.id.lv_down_show);
+        if(listComics==null||listComics.size()==0){
+        	List<DownListData> list = manager.queryDownDataList("select mId,mDirector,mPic,mTitle,isdown from down ",null);
+        	
+        	List<DownListData> tempList = new ArrayList<DownListData>();
+        	for(DownListData down:list){
+        		if(!getDownList(tempList,down.getmId().toString())){
+        			tempList.add(down);
+        		}
+        	}
+        	String status = "";
+        	for(DownListData data:tempList){
+        		int count = 0; 
+        		int k=0;int m=0;int j=0;int n = 0;
+        		
+	        		for(DownListData down:list){
+	        			if(down.getmId().toString().equals(data.getmId().toString())){
+	        				if("0".equals(down.getIsdown().toString())){
+	        					k++;
+	        				}
+	        				if("1".equals(down.getIsdown().toString())){
+	        					m++;
+	        				}
+	        				if("2".equals(down.getIsdown().toString())){
+	        					j++;
+	        				}
+	        				if("3".equals(down.getIsdown().toString())){
+	        					n++;
+	        				}
+	        				count++;
+	        			}
+	        		}
+	        		
+	        		if(j>0){
+	    				status = "暂停中";
+	    			}
+	        		if(n>0){
+	    				status = "暂停中";
+	    			}
+	        		if(m>0){
+	    				status = "下载中";
+	    			}
+	        		if(k==count){
+	    				status = "下载完成";
+	    			}
+        		
+        		data.setStatus(status);
+        		data.setTotal(String.valueOf(count));
+        		
+        	}
+        	listComics.clear();
+    		listComics.addAll(tempList);
+    		if(Utils.updateCollectInfo!=null){
+    			Utils.updateCollectInfo.updateDowns();
+    		}
+        }else{
+        	String status = "";
+        	List<DownListData> list = manager.queryDownDataList("select mId,mDirector,mPic,mTitle,isdown from down ",null);
+        	List<DownListData> tempList = new ArrayList<DownListData>();
+        	for(DownListData down:list){
+        		if(!getDownList(tempList,down.getmId().toString())){
+        			tempList.add(down);
+        		}
+        	}
+        	for(DownListData data:tempList){
+        		int count = 0; 
+        		int k=0;int m=0;int j=0;int n = 0;
+        		if(Utils.getDownChapterListByMid(data.getmId().toString())==null||Utils.getDownChapterListByMid(data.getmId().toString()).size()==0){
+        			for(DownListData down:list){
+	        			if(down.getmId().toString().equals(data.getmId().toString())){
+	        				if("0".equals(down.getIsdown().toString())){
+	        					k++;
+	        				}
+	        				if("1".equals(down.getIsdown().toString())){
+	        					m++;
+	        				}
+	        				if("2".equals(down.getIsdown().toString())){
+	        					j++;
+	        				}
+	        				if("3".equals(down.getIsdown().toString())){
+	        					n++;
+	        				}
+	        				count++;
+	        			}
+	        		}
+	        		
+	        		if(j>0){
+	    				status = "暂停中";
+	    			}else if(n>0){
+	    				status = "暂停中";
+	    			}
+	        		if(m>0){
+	    				status = "下载中";
+	    			}
+	        		if(k==count){
+	    				status = "下载完成";
+	    			}
+        		}else{
+        			for(Down down:Utils.getDownChapterListByMid(data.getmId().toString())){
+            			if(down.getCd().getmId().toString().equals(data.getmId().toString())){
+            				if("0".equals(down.getIsdonw().toString())){
+            					k++;
+            				}
+            				if("1".equals(down.getIsdonw().toString())){
+            					m++;
+            				}
+            				if("2".equals(down.getIsdonw().toString())){
+            					j++;
+            				}
+            				if("3".equals(down.getIsdonw().toString())){
+            					n++;
+            				}
+            				count++;
+            			}
+            		}
+            		
+            		if(j>0){
+        				status = "暂停中";
+        			}else if(n>0){
+        				status = "暂停中";
+        			}
+            		if(m>0){
+        				status = "下载中";
+        			}
+            		if(k==count){
+        				status = "下载完成";
+        			}
+        		}
+        		data.setStatus(status);
+        		data.setTotal(String.valueOf(count));
+        	}
+        	listComics.clear();
+    		listComics.addAll(tempList);
+    		Utils.updateCollectInfo.updateDowns();
+        }
+        	
+        manager.closeDB();
+        adapter=new DownBookAdapter(DownloadFragment.this.getActivity(),listComics);
+        lv_down_show.setAdapter(adapter);
+       
+        lv_down_show.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				DownListData dl = listComics.get(position);
+            	if(dl.isFlag()){//表示正在下载点击里面的
+            		Intent intent=new Intent(DownloadFragment.this.getActivity(), DownShowActivity.class);
+            		intent.putExtra("ben", String.valueOf(dl.getmId()));//将当前下载的漫画传给下载项页面DownShowActivity
+            		DownloadFragment.this.getActivity().startActivityForResult(intent, 0);
+            		
+            	}else{//删除操作，删除之前停掉所有下载
+            		
+            		boolean flag = false;
+            		for(DownListData down : listComics){
+            			if(down.getIsdown()==1){
+            				flag = true;
+            				break;
+            			}
+            		}
+            		if(flag){
+            			showTextToast(DownloadFragment.this.getActivity(),"请先暂停所有下载再做删除操作!");
+            		}else{
+            			createDialog(dl,position);
+            		}
+            		
+            	}
+			}
+		});
+        Utils.updateDownShow=this;
+        return view;
+    }
+ // 不重复显示Toast的方法
+ 	private void showTextToast(Context content,String message){
+ 		if (toast == null){
+			toast = Toast.makeText(content, message, 500);
+		}else{
+			toast.setText(message);
+		}
+		toast.show();
+ 	}
+   
+    /**
+     * 更新显示状态
+     * @param flag
+     */
+    public void updateStatus(boolean flag){
+    	for (DownListData down : listComics) {
+    		down.setFlag(flag);
+		}
+    	
+    	if(DownloadFragment.this.getActivity()!=null){
+    		adapter.notifyDataSetChanged();
+//    		adapter=new DownBookAdapter(DownloadFragment.this.getActivity(),listComics);
+//    		lv_down_show.setAdapter(adapter);
+    	}
+    	
+    	
+    }
+
+
+	@Override
+	public void updateDownTotal() {
+		
+		manager = new DBManager(DownloadFragment.this.getActivity(), DBUtil.ReadName, null, DBUtil.Code);
+		List<DownListData> list = manager.queryDownDataList("select mId,mDirector,mPic,mTitle,isdown from down ",null);
+		manager.closeDB();
+    	List<DownListData> tempList = new ArrayList<DownListData>();
+    	for(DownListData down:list){
+    		if(!getDownList(tempList,down.getmId().toString())){
+    			tempList.add(down);
+    		}
+    	}
+    	String status = "";
+    	for(DownListData data:tempList){
+    		int count = 0; 
+    		int k=0;int m=0;int j=0;int n = 0;
+    		if(Utils.getDownChapterListByMid(data.getmId().toString())==null||Utils.getDownChapterListByMid(data.getmId().toString()).size()==0){
+        		for(DownListData down:list){
+        			if(down.getmId().toString().equals(data.getmId().toString())){
+        				if("0".equals(down.getIsdown().toString())){
+        					k++;
+        				}
+        				if("1".equals(down.getIsdown().toString())){
+        					m++;
+        				}
+        				if("2".equals(down.getIsdown().toString())){
+        					j++;
+        				}
+        				if("3".equals(down.getIsdown().toString())){
+        					n++;
+        				}
+        				count++;
+        			}
+        		}
+        		
+        		if(j>0){
+    				status = "暂停中";
+    			}else if(n>0){
+    				status = "暂停中";
+    			}
+        		if(m>0){
+    				status = "下载中";
+    			}
+        		if(k==count){
+    				status = "下载完成";
+    			}
+    		}else{
+    			for(Down down:Utils.getDownChapterListByMid(data.getmId().toString())){
+        			if(down.getCd().getmId().toString().equals(data.getmId().toString())){
+        				if("0".equals(down.getIsdonw().toString())){
+        					k++;
+        				}
+        				if("1".equals(down.getIsdonw().toString())){
+        					m++;
+        				}
+        				if("2".equals(down.getIsdonw().toString())){
+        					j++;
+        				}
+        				if("3".equals(down.getIsdonw().toString())){
+        					n++;
+        				}
+        				count++;
+        			}
+        		}
+        		
+        		if(j>0){
+    				status = "暂停中";
+    			}else if(n>0){
+    				status = "暂停中";
+    			}
+        		if(m>0){
+    				status = "下载中";
+    			}
+        		if(k==count){
+    				status = "下载完成";
+    			}
+    		}
+    		data.setStatus(status);
+    		data.setTotal(String.valueOf(count));
+    		
+    	}
+    	listComics.clear();
+		listComics.addAll(tempList);
+		
+		adapter.notifyDataSetChanged();
+	}
+
+
+	@Override
+	public void removeDownComics(String mId) {
+		boolean flag = false;
+		for(DownListData data:listComics){
+			if(mId.equals(data.getmId().toString())){
+				listComics.remove(data);
+				flag = true;
+				break;
+			}
+		}
+		if(flag)
+		adapter.notifyDataSetChanged();
+	}
+	protected void createDialog(final DownListData down,final int position) {
+		AlertDialog.Builder builder = new Builder(DownloadFragment.this.getActivity());
+		builder.setMessage("是否同时删除本部漫画下载的图片文件？");
+		builder.setTitle("提示");
+		builder.setPositiveButton("是", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				
+				doDeleteFile(down, position, true);
+				dialog.dismiss();
+			}
+
+			
+		});
+		builder.setNegativeButton("否", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				//doDeleteFile(down, position, false);
+				dialog.dismiss();
+			}
+		});
+		builder.create().show();
+	}
+	
+	private void doDeleteFile(final DownListData dl, final int position,
+			boolean flag) {
+		for(Down downing:Utils.getDownChapterListByMid(String.valueOf(dl.getmId()))){//列表中是不是有下载项，主要是新选的一些章节正在下载中
+			if(downing.getIsdonw()==1){//表示原来新选的还在下载
+				downing.setDownflag(false);
+				try {
+					Utils.isdowning = false;//关闭后台下载线程下载下一话
+					downing.setIsdonw(2);//状态变成正为暂停
+//					downing.getImageDownProgress().downWait();
+					downing.getImageDownProgress().stopDown();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}//停掉原来的下载线程
+				break;
+			}
+		}
+		manager = new DBManager(DownloadFragment.this.getActivity(), DBUtil.ReadName, null, DBUtil.Code);
+	    manager.deleteByMid(dl.getmId());
+	    manager.closeDB();
+	    listComics.remove(position);
+	    Utils.downComicsMap.remove(String.valueOf(dl.getmId()));
+	    if(Utils.downComicsMap.size()==0){
+	    	Utils.updateEditFlag.update("down");
+	    }
+	    adapter=new DownBookAdapter(DownloadFragment.this.getActivity(),listComics);
+	    lv_down_show.setAdapter(adapter);//更新下载列表
+
+		Utils.updateCollectInfo.updateDowns();
+	    
+		if(flag){//删除目录
+			File sdcardDir = Environment.getExternalStorageDirectory();
+			String path = sdcardDir.getPath() + "/manyun/"+dl.getmTitle();
+			FileUtil.deleteDirectory(path);
+		}
+	}
+	
+}

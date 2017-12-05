@@ -1,0 +1,132 @@
+package com.ch.mhy.entity;
+
+import android.annotation.SuppressLint;
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+/**
+ * 评论实体
+ * @author xc.li
+ * @date 2015-10-15
+ */
+public class CommentInfo implements Serializable{
+	private static final long serialVersionUID = 1L;
+
+	private long id;
+	
+	private int bigbookId; //关联漫画ID
+	
+	private String userId; //用户ID
+	
+	private String userType; //用户登陆类型1:QQ 2:微信 3:微博
+	
+	private String nickname; //昵称
+	
+	private String topic;   //主题内容
+	
+	private String imgUrl;  //图片URL
+	
+	private long createTime;//发表时间
+
+	private int userOkCnt;
+	private int userMsgCnt;
+	private int isGiveMeFine;
+	
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public int getBigbookId() {
+		return bigbookId;
+	}
+
+	public void setBigbookId(int bigbookId) {
+		this.bigbookId = bigbookId;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getTopic() {
+		return topic;
+	}
+
+	public void setTopic(String topic) {
+		this.topic = topic;
+	}
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+
+	@SuppressLint("SimpleDateFormat") 
+	public String getCommentTime() {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String date = formatter.format(new Date(createTime));
+		return date;
+	}
+	
+	public long getCreateTime() {
+		return this.createTime;
+	}
+
+	public void setCreateTime(long createTime) {
+		this.createTime = createTime;
+	}
+
+	public int getUserOkCnt() {
+		return userOkCnt;
+	}
+
+	public void setUserOkCnt(int userOkCnt) {
+		this.userOkCnt = userOkCnt;
+	}
+
+	public int getUserMsgCnt() {
+		return userMsgCnt;
+	}
+
+	public void setUserMsgCnt(int userMsgCnt) {
+		this.userMsgCnt = userMsgCnt;
+	}
+
+	public int getIsGiveMeFine() {
+		return isGiveMeFine;
+	}
+
+	public void setIsGiveMeFine(int isGiveMeFine) {
+		this.isGiveMeFine = isGiveMeFine;
+	}
+	
+}

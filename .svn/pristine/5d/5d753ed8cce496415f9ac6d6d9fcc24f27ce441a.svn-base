@@ -1,0 +1,12 @@
+package com.ch.mhy.interf;
+/**
+ * 更新下载列表数据
+ * @author wenli.liu
+ *
+ */
+public interface UpdateDownShow {
+	
+	void removeDownComics(String mId);
+
+	void updateDownTotal();
+}

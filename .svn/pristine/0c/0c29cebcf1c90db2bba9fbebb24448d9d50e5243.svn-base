@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#e5e5e5"
+              android:orientation="vertical">
+
+<!--     <include -->
+<!--             android:layout_width="fill_parent" -->
+<!--             layout="@layout/title"/> -->
+    <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+             android:orientation="vertical"
+             android:background="#000000"
+        >
+
+    <TextView
+            android:id="@+id/ch_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/ch_title_my"
+            />
+
+</FrameLayout>
+    
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#db332C"/>
+    
+    <ScrollView 
+         android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+        >
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.4"
+                android:orientation="vertical"
+                >
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#beb9b7"/>
+            <LinearLayout
+                    android:id="@+id/ll_my_login"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/my_row_my">
+
+                <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:layout_gravity="center"
+                        android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/iv_myhead"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ch_my_head"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="6"
+                        android:orientation="vertical">
+
+                    <TextView
+                        	android:id="@+id/tv_nickname"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/my_operate"
+                            android:textColor="#db332c"
+                            android:textSize="16sp"/>
+
+                    <TextView
+                        	android:id="@+id/tv_msg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/my_msg"
+                            android:textColor="#dbdbdb"
+                            android:textSize="12sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:layout_weight="1">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ch_cate_authgo"/>
+                </LinearLayout>
+            </LinearLayout>
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="#beb9b7"/>
+
+        </LinearLayout>
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4"
+                android:orientation="vertical"
+                >
+            <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="10"
+                    android:background="@drawable/my_row_my"
+                    android:orientation="vertical">
+
+                <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        >
+                    <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dp"
+                            android:background="#beb9b7"/>
+
+                    <LinearLayout
+                            android:id="@+id/ll_my_readed"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/my_row_my">
+
+
+                        <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="8">
+                            <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="8dp"
+
+                                    android:background="@drawable/ch_my_readed"/>
+
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:text="@string/my_readed"
+                                    android:textColor="@color/textcolor"
+                                    android:textSize="@dimen/my_cate_title"/>
+
+                            <TextView
+                                android:id="@+id/tv_rsl"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:textColor="@color/textcolor"
+                                    android:textSize="@dimen/my_cate_title"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center"
+                                android:layout_weight="1">
+
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/ch_cate_authgo"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        >
+                    <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:background="#dbdbdb"/>
+
+                    <LinearLayout
+                            android:id="@+id/ll_my_down"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/my_row_my">
+
+
+                        <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="8">
+
+                            <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/ch_my_down"/>
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:text="@string/my_down"
+                                    android:textColor="#32bc1a"
+                                    android:textSize="@dimen/my_cate_title"/>
+
+                            <TextView
+                                android:id="@+id/tv_downs"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:textColor="#32bc1a"
+                                    android:textStyle="bold"
+                                    android:textSize="@dimen/my_cate_title"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center"
+                                android:layout_weight="1">
+
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/ch_cate_authgo"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        >
+                    <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:background="#dbdbdb"/>
+
+                    <LinearLayout
+                            android:id="@+id/ll_my_collect"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/my_row_my">
+
+
+                        <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="8">
+                            <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/ch_my_collect"/>
+
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:text="@string/my_collect"
+                                    android:textColor="#1e79c7"
+                                    android:textSize="@dimen/my_cate_title"/>
+
+                            <TextView
+                                android:id="@+id/tv_ssl"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:textColor="#1e79c7"
+                                    android:textSize="@dimen/my_cate_title"/>
+                        </LinearLayout>
+                        
+                   
+
+                        <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center"
+                                android:layout_weight="1">
+
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/ch_cate_authgo"/>
+                        </LinearLayout>
+                        
+                        
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </LinearLayout>
+            
+             <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"
+                        android:background="#beb9b7"/>
+
+        </LinearLayout>
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                >
+
+            <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="#FFFFFF"
+                    android:orientation="vertical">
+
+                
+
+                <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+ 					<TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"
+                        android:background="#beb9b7"/>
+ 					
+                    <LinearLayout
+                            android:id="@+id/ll_my_set"
+                            android:layout_width="fill_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:onClick="onclick"
+                            android:background="@drawable/my_row_system">
+
+                        <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="8">
+
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="14dp"
+                                    android:text="@string/my_down_set"
+                                    android:textSize="16sp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center"
+                                android:layout_weight="1">
+
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/ch_cate_authgo"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:background="#dbdbdb"/>
+
+                    <LinearLayout
+                            android:id="@+id/ll_my_return"
+                            android:layout_width="fill_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:onClick="onclick"
+                            android:background="@drawable/my_row_system">
+
+                        <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="8">
+
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="14dp"
+                                    android:text="@string/my_msg_return"
+                                    android:textSize="16sp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center"
+                                android:layout_weight="1">
+
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/ch_cate_authgo"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                    
+                     <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:background="#dbdbdb"/>
+                    <LinearLayout
+                        android:id="@+id/ll_wonrec"
+                            android:layout_width="fill_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:onClick="onclick"
+                            android:background="@drawable/my_row_system">
+
+                        <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="8">
+
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="14dp"
+                                    android:text="@string/my_msg_wonrec"
+                                    android:textSize="16sp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center"
+                                android:layout_weight="1">
+
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/ch_cate_authgo"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                    
+                     <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"
+                        android:background="#beb9b7"/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
+</LinearLayout>

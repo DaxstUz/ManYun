@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f5f5f7"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:background="#ffffff"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.8"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/iv_comm_item"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/my" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="2"
+            android:padding="5dp"
+             >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/tv_comm_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.2"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="斗破苍穹" />
+
+                <LinearLayout 
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    >
+                <TextView
+                    android:id="@+id/tv_comm_topic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                     android:textSize="12sp"
+                     android:textColor="#dbdbdb"
+                    android:text="不错哦。。。。" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1" >
+						<ImageView 
+						    android:layout_width="wrap_content"
+						    android:layout_height="wrap_content"
+						    android:src="@drawable/ok_hand_red"
+						    />
+	                        
+                        <TextView
+                            android:id="@+id/tv_approveNum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="20" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1" >
+<ImageView 
+						    android:layout_width="wrap_content"
+						    android:layout_height="wrap_content"
+						    android:src="@drawable/msg_red"
+						    />
+	                        
+                        <TextView
+                            android:id="@+id/tv_discussNum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="30" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="3"
+                        android:gravity="right|center_vertical" >
+
+                        <TextView
+                            android:id="@+id/tv_comm_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_margin="5dp"
+                android:src="@drawable/my_update_msg" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

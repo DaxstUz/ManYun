@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:background="#dbdbdb"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:src="@drawable/login_logo" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/ll_login_qq"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:onClick="onclick"
+            android:background="@drawable/login_bg"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/iv_loginqq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:src="@drawable/login_qqm" />
+
+            <TextView
+                android:id="@+id/tv_loginqq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_qq" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_login_weixin"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:onClick="onclick"
+            android:background="@drawable/login_bg"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/iv_loginweixin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:src="@drawable/login_weixinm" />
+
+            <TextView
+                 android:id="@+id/tv_loginweixin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_weixin" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_login_sina"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:onClick="onclick"
+            android:background="@drawable/login_bg"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/iv_loginsina"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:src="@drawable/login_sinam" />
+
+            <TextView
+                 android:id="@+id/tv_loginsina"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_sina" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

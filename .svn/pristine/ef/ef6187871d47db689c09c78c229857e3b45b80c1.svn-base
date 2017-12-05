@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:my="http://schemas.android.com/apk/res/com.ch.mhy"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.7">
+	    <FrameLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:background="#000000" >
+	        <TextView
+	            android:id="@+id/tv_bookname"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="center"
+	            android:textAppearance="?android:attr/textAppearanceLarge"
+	            android:textColor="#FFFFFF" />	
+	        <LinearLayout
+	            android:id="@+id/btn_show_back"
+	            android:layout_width="wrap_content"
+	            android:layout_height="match_parent"
+	            android:layout_gravity="center_vertical"
+	            android:onClick="onclick" >
+	
+	            <ImageView
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_marginLeft="20dp"
+	                android:layout_marginRight="20dp"
+	                android:layout_gravity="center"
+	                android:background="@drawable/ch_back" />
+	        </LinearLayout>
+	
+
+	    </FrameLayout>
+	</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#E4E4E4"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+			<LinearLayout
+		        android:layout_width="wrap_content"
+		        android:layout_height="fill_parent">
+                    <ImageView
+                        android:id="@+id/iv_detail_book_img"
+                        android:layout_width="100dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/ch_image_mobg2" />
+			</LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_weight="2"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="评分：" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center" >
+
+                            <RatingBar
+                                android:id="@+id/ratingBar1"
+                                style="@style/roomRatingBar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:max="50" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/tv_showdetail_author"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="作者：松岛" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/tv_showdetail_cate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="分类：热血" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/tv_showdetail_update"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="更新到23话" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_book_addcollect"
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:onClick="onclick" >
+
+                        <TextView
+                            android:id="@+id/tv_addcollect"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ch_book_addcollect" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <Button
+                    android:id="@+id/btn_book_down"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ch_book_down"
+                    android:onClick="onclick"
+                    android:text="@string/down" />
+
+                <!-- @drawable/ch_book_beginread -->
+
+                <Button
+                    android:id="@+id/btn_reading"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    android:background="#4d463f"
+                    android:onClick="onclick"
+                    android:text="@string/beginread"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+        </LinearLayout>
+        
+		<com.ch.mhy.widget.ChScrollView
+		    android:id="@+id/chScrollView"
+		     android:background="#CAC5C1"
+             android:layout_width="fill_parent"
+             android:layout_height="fill_parent" >
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#CAC5C1"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+
+                    <TextView
+                        android:id="@+id/tv_showdetail_content"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="15dp"
+                        android:textSize="12sp"
+                        android:textStyle="normal"
+                        android:clickable="true"
+                        android:onClick="onclick" />
+
+                <ImageView
+                    android:id="@+id/iv_uord"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|right"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/down" />
+            </FrameLayout>
+			<TextView 
+			    android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:textSize="9dip"
+                android:text="漫云的漫画内容均来自网友分享和上传"/>
+            <Button
+                android:id="@+id/btn_book_readchange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/ch_books_listf"
+                android:onClick="onclick" />
+
+			<com.ch.mhy.widget.ChGridView
+                android:id="@+id/gv_book_select"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:horizontalSpacing="10dp"
+                android:numColumns="2"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:stretchMode="columnWidth"
+                android:layout_marginBottom="10dp"/>
+
+        </LinearLayout>
+        </com.ch.mhy.widget.ChScrollView>
+    </LinearLayout>
+
+</LinearLayout>

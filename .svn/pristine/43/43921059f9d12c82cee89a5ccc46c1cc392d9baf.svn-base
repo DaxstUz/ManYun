@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:my="http://schemas.android.com/apk/res/com.ch.mhy"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:background="#f3f3f3">
+
+    <com.ch.mhy.widget.ScaleLinearLayout
+            android:id="@+id/my"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            my:aspectRatio="1.0"
+            my:aspectRatioBase="0">
+        <ImageView
+                android:id="@+id/iv_type_show"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerHorizontal="true"
+                android:scaleType="matrix"
+                android:background="@drawable/ch_image_mobg2">
+        </ImageView>
+    </com.ch.mhy.widget.ScaleLinearLayout>
+
+    <TextView
+            android:id="@+id/tv_type_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/my"
+            android:layout_centerHorizontal="true"
+            >
+    </TextView>
+
+</RelativeLayout>

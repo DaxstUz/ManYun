@@ -1,0 +1,161 @@
+package com.ch.mhy.util;
+
+public class UrlConstant {
+
+
+//    public final static String Ip = "http://192.168.1.249";
+//	public final static String Port = ":8080";
+//    public final static String Ip = "http://192.168.1.210";
+//    public final static String Port = ":8082";
+	
+	public final static String Ip="http://219.135.99.160";
+    public final static String Port = ":80";
+    
+    
+    //图片IP
+    public final static String Ip1="http://219.135.99.159";
+    public final static String Port1 = ":8080";
+    
+    public final static String downPort = ":8081";
+    
+
+    public final static String Server = "/manhuaapp";
+
+    /**
+     * 搜索地址
+     */
+    public static final String UrlSearch = Ip + Port + Server + "/remoting/search/queryComicsList";
+   
+    /**
+     * 搜索关键字列表地址
+     */
+    public static final String UrlqueryComicsByName = Ip + Port + Server + "/remoting/search/queryComicsByName";
+
+    /**
+     * 插入关键字
+     */
+    public static final String UrlInsertKey = Ip + Port + Server + "/remoting/search/insertKey";
+
+    /**
+     * 热门关键字
+     */
+    public static final String UrlKeyList = Ip + Port + Server + "/remoting/search/queryKeyListPage";
+
+    /**
+     * 猜你喜欢
+     */
+    public static final String UrlGuessList = Ip + Port + Server + "/remoting/guess/queryGuessListPage";
+
+    /**
+     * 精选首页接口
+     */
+    public static final String UrlChoiceType = Ip + Port + Server + "/remoting/choice/queryChoiceTypePage";
+
+    /**
+     * 精选列表接口
+     */
+    public static final String UrlChoiceList = Ip + Port + Server + "/remoting/choice/queryChoiceListPage";
+
+    /**
+     * 题材首页接口
+     */
+    public static final String UrlCategoryType = Ip + Port + Server + "/remoting/category/queryCategoryTypePage";
+
+    /**
+     * 题材列表接口
+     */
+    public static final String UrlCategoryList = Ip + Port + Server + "/remoting/category/queryCategoryListPage";
+
+    public static final String UrlComicsSelectDetail = Ip + Port + Server + "/remoting/read/queryAllComicsDetail";
+    
+    public static final String UrlComicsSelectDetailById = Ip + Port + Server + "/remoting/read/queryComicsDetailById";
+
+    /**
+     * 作者列表接口
+     */
+    public static final String UrlAuthorType = Ip + Port + Server + "/remoting/author/queryAuthorTypePage";
+
+
+    /**
+     * 作者漫画列表接口
+     */
+    public static final String UrlAuthorList = Ip + Port + Server + "/remoting/author/queryAuthorListPage";
+
+    /**
+     * 首页
+     */
+    public static final String UrlBookType = Ip + Port + Server + "/remoting/book/queryBookTypePage";
+
+    /**
+     * 轮播图
+     */
+    public static final String UrlFirstTurn = Ip + Port + Server + "/remoting/book/queryFirstTurn";
+
+    /**
+     * 首页列表
+     */
+    public static final String UrlBookList = Ip + Port + Server + "/remoting/book/queryBookListPage";
+
+    /**
+     * 章节列表
+     */
+    public static final String UrlComicsDetailPage = Ip + Port + Server + "/remoting/read/queryComicsDetailPage";
+   
+    /**
+     * 添加反馈
+     */
+    public static final String UrlinsertFeedBack = Ip + Port + Server + "/remoting/feedback/insertFeedBack";
+    
+    /**
+     *历史反馈列表
+     */
+    public static final String UrlqueryFeedbackList = Ip + Port + Server + "/remoting/feedback/queryFeedbackList";
+    
+    /**
+     *分享
+     */
+    public static final String UrlinsertBookShare = Ip + Port + Server + "/remoting/book/insertBookShare";
+    
+    /**
+     *新增人气
+     */
+    public static final String UrlupdateHits = Ip + Port + Server + "/remoting/read/updateHits";
+
+    /**
+     *获取当前APP版本
+     */
+    public static final String UrlqueryCurrVersion = Ip + Port + Server + "/remoting/version/queryCurrVersion";
+    
+    /**
+     * 登录信息更新接口
+     */
+    public static final String UrlpushUserUseMessage = Ip + Port + Server + "/remoting/push/pushUserUseMessage";
+    
+    /**
+     * 增加阅读记录到后台
+     */
+    public static final String addRedToServer="http://www.chamanhua.com/web/readLog/addReadLog";
+   
+    /**
+     * 删除阅读记录到后台
+     */
+    public static final String delRedToServer="http://www.chamanhua.com/web/readLog/deleteReadLog";
+    /**
+     * 增加收藏记录到后台
+     */
+    public static final String addCollectToServer="http://www.chamanhua.com/web/indexsearch/addComicToCollected";
+    /**
+     * 删除收藏记录到后台
+     */
+    public static final String delCollectToServer="http://www.chamanhua.com/web/indexsearch/deleteComicFromCollected";
+    /**
+     *从后台批量获取阅读记录
+     */
+//    public static final String getRedLogs="http://192.168.1.210:8084/manhuaweb/web/syncdata/syncUserReadComic";
+    public static final String getRedLogs="http://www.chamanhua.com/web/syncdata/syncUserReadComic";
+    /**
+     *从后台批量获取收藏记录
+     */
+//    public static final String getCollectLogs="http://192.168.1.210:8084/manhuaweb/web/syncdata/syncUserCollectComic";
+    public static final String getCollectLogs="http://www.chamanhua.com/web/syncdata/syncUserCollectComic";
+}

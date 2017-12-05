@@ -1,0 +1,37 @@
+package com.ch.mhy.util;
+
+import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
+
+/**
+ * 进度条更新线程
+ * @author wenli.liu
+ *
+ */
+public class ProgressBarThread implements Runnable {
+	private ProgressBar progressBar;
+	public ProgressBarThread(ProgressBar progressBar){
+		this.progressBar = progressBar;
+	}
+	@Override
+	public void run() {
+		if(Utils.isdowned){
+			Thread.currentThread().interrupt();
+		}
+		while(progressBar.getProgress() <= progressBar.getMax()&&!Utils.isdowned){
+			try {
+				if(progressBar.getProgress() == progressBar.getMax()){
+					//progressBar.setProgress(0);
+				}else{
+					progressBar.incrementProgressBy(1);
+					Thread.sleep(200);
+				}
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+}

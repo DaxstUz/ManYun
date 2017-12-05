@@ -1,0 +1,379 @@
+package com.ch.mhy.fragment;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.InflateException;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.ch.mhy.R;
+import com.ch.mhy.activity.my.CollectActivity;
+import com.ch.mhy.activity.my.GeneralsettingActivity;
+import com.ch.mhy.activity.my.PersonReturn;
+import com.ch.mhy.db.DBManager;
+import com.ch.mhy.db.DBUtil;
+import com.ch.mhy.entity.ComicsDetail;
+import com.ch.mhy.interf.UpdateCollectInfo;
+import com.ch.mhy.util.Utils;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.controller.UMServiceFactory;
+import com.umeng.socialize.controller.UMSocialService;
+import com.umeng.socialize.controller.listener.SocializeListeners.UMAuthListener;
+import com.umeng.socialize.controller.listener.SocializeListeners.UMDataListener;
+import com.umeng.socialize.exception.SocializeException;
+import com.umeng.socialize.sso.UMQQSsoHandler;
+
+/**
+ * 设置碎片
+ *
+ * @author DaxstUz 2416738717 2015年5月4日
+ */
+public class MyFragment extends Fragment implements OnClickListener,
+		UpdateCollectInfo {
+
+	private LinearLayout ll_my_collect;
+	private LinearLayout ll_my_login;
+	private LinearLayout ll_my_readed;
+	private LinearLayout ll_my_down;
+	private LinearLayout ll_my_set;// 点击设置进入通用设置页面......
+	private LinearLayout ll_my_return;
+
+	private TextView tv_rsl;
+	private TextView tv_ssl;
+	private TextView tv_downs;
+	
+	private TextView tv_nickname;//昵称
+	private TextView tv_msg;//
+
+	private DBManager manager;
+
+	private long collects;
+	private long readeds;
+
+	private long downs;
+
+	/**
+	 * 头像
+	 */
+	private ImageView iv_myhead;
+	
+	/**
+	 * umeng 第三方登录
+	 */
+	UMSocialService mController = UMServiceFactory
+			.getUMSocialService("com.umeng.login");
+	
+	
+	/**
+	 * 用来存用户本地信息
+	 */
+	private SharedPreferences  sp;
+
+	private  String openid ;
+	private View view;
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		if (view != null) {
+	        ViewGroup parent = (ViewGroup) view.getParent();
+	        if (parent != null)
+	            parent.removeView(view);
+	        return view;
+	    }
+	    try {
+//	        view = inflater.inflate(R.layout.fragment_book, container, false);
+	        view = inflater.inflate(R.layout.fragment_my, null);
+	    } catch (InflateException e) {
+	        
+	    }
+		initView(view);
+		Utils.updateCollectInfo = this;
+		return view;
+	}
+
+	/**
+	 * 初始化view
+	 * 
+	 * @param view
+	 */
+	private void initView(View view) {
+		sp=this.getActivity().getSharedPreferences("userinfo",Context.MODE_PRIVATE);
+		
+		ll_my_collect = (LinearLayout) view.findViewById(R.id.ll_my_collect);
+		ll_my_login = (LinearLayout) view.findViewById(R.id.ll_my_login);
+		ll_my_readed = (LinearLayout) view.findViewById(R.id.ll_my_readed);
+		ll_my_down = (LinearLayout) view.findViewById(R.id.ll_my_down);
+		// ll_my_clear = (LinearLayout) view.findViewById(R.id.ll_my_clear);
+		ll_my_set = (LinearLayout) view.findViewById(R.id.ll_my_set);// 获得设置按钮对象......
+		ll_my_return = (LinearLayout) view.findViewById(R.id.ll_my_return);
+		ll_my_set.setOnClickListener(MyFragment.this);// 为设置按钮添加监听器......
+		ll_my_return.setOnClickListener(MyFragment.this);
+		ll_my_down.setOnClickListener(MyFragment.this);
+		ll_my_collect.setOnClickListener(MyFragment.this);
+		ll_my_login.setOnClickListener(MyFragment.this);
+		ll_my_readed.setOnClickListener(MyFragment.this);
+
+		tv_rsl = (TextView) view.findViewById(R.id.tv_rsl);
+		tv_ssl = (TextView) view.findViewById(R.id.tv_ssl);
+		tv_downs = (TextView) view.findViewById(R.id.tv_downs);
+		
+		tv_msg = (TextView) view.findViewById(R.id.tv_msg);
+		
+		tv_nickname = (TextView) view.findViewById(R.id.tv_nickname);
+		String screen_name=sp.getString("screen_name", "");
+		if(screen_name.length()>0){
+			tv_nickname.setText(screen_name);
+			tv_msg.setText("");
+		}
+		
+		iv_myhead = (ImageView) view.findViewById(R.id.iv_myhead);
+
+		/**
+		 * 展示图片
+		 */
+		String headurl=sp.getString("headurl", "");
+		if(headurl.length()>0){
+			ImageLoader.getInstance().displayImage(headurl, iv_myhead,new ImageLoadingListener() {
+				
+				@Override
+				public void onLoadingStarted(String imageUri, View view) {
+					// TODO Auto-generated method stub
+					view.setBackgroundResource(R.drawable.ch_my_head);
+				}
+				
+				@Override
+				public void onLoadingFailed(String imageUri, View view,
+						FailReason failReason) {
+					// TODO Auto-generated method stub
+					
+					view.setBackgroundResource(0);
+				}
+				
+				@Override
+				public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+					// TODO Auto-generated method stub
+					view.setBackgroundResource(0);
+				}
+				
+				@Override
+				public void onLoadingCancelled(String imageUri, View view) {
+					// TODO Auto-generated method stub
+					view.setBackgroundResource(0);
+				}
+			});
+		}
+		
+		getInfo();
+
+	}
+
+	/**
+	 * 授权登录平台
+	 */
+	private void doAuthor() {
+		UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler(getActivity(),
+				"1104686309", "LsxbkRrXqzao9zVP");
+		qqSsoHandler.addToSocialSDK();
+
+		mController.doOauthVerify(MyFragment.this.getActivity(),
+				SHARE_MEDIA.QQ, new UMAuthListener() {
+					@Override
+					public void onStart(SHARE_MEDIA platform) {
+//						Toast.makeText(MyFragment.this.getActivity(), "授权开始",
+//								Toast.LENGTH_SHORT).show();
+					}
+
+					@Override
+					public void onError(SocializeException e,
+							SHARE_MEDIA platform) {
+//						Toast.makeText(MyFragment.this.getActivity(), "授权错误",
+//								Toast.LENGTH_SHORT).show();
+					}
+
+					@Override
+					public void onComplete(Bundle value, SHARE_MEDIA platform) {
+//						Toast.makeText(MyFragment.this.getActivity(), "授权完成",
+//								Toast.LENGTH_SHORT).show();
+						
+						  if (value != null && !TextUtils.isEmpty(value.getString("uid"))) {  
+				               openid = value.getString("openid");  
+//				                String access_token = value.getString("access_token"); 
+				               
+						  }
+						  
+						// 获取相关授权信息
+						mController.getPlatformInfo(
+								MyFragment.this.getActivity(), SHARE_MEDIA.QQ,
+								new UMDataListener() {
+									@Override
+									public void onStart() {
+//										Toast.makeText(
+//												MyFragment.this.getActivity(),
+//												"获取平台数据开始...",
+//												Toast.LENGTH_SHORT).show();
+									}
+
+									@Override
+									public void onComplete(int status,
+											Map<String, Object> info) {
+										if (status == 200 && info != null) {
+											Editor editer=sp.edit();
+											 editer.putString("openid", openid);
+											String headurl=(String) info.get("profile_image_url");
+											ImageLoader.getInstance().displayImage(headurl, iv_myhead);
+											editer.putString("headurl", headurl);
+											
+											String screen_name=(String) info.get("screen_name");
+											tv_nickname.setText(screen_name);
+											tv_msg.setText("");
+											editer.putString("screen_name", screen_name);
+											
+											editer.commit();
+											
+										} else {
+											Log.d("TestData", "发生错误：" + status);
+										}
+									}
+								});
+					}
+
+					@Override
+					public void onCancel(SHARE_MEDIA platform) {
+						Toast.makeText(MyFragment.this.getActivity(), "授权取消",
+								Toast.LENGTH_SHORT).show();
+					}
+				});
+	}
+
+	private void getInfo() {
+		// TODO Auto-generated method stub
+		manager = new DBManager(MyFragment.this.getActivity(), DBUtil.ReadName,
+				null, DBUtil.Code);
+		List<ComicsDetail> list = manager.query();
+
+		List<ComicsDetail> tempList = new ArrayList<ComicsDetail>();
+
+		for (int i = 0; i < list.size(); i++) {
+			ComicsDetail comicsDetail = list.get(i);
+			if (comicsDetail.getmId() != null && comicsDetail.getmUrl() != null
+					&& comicsDetail.getmPic() != null) {
+				comicsDetail.setFlag(true);
+				tempList.add(comicsDetail);
+			}
+		}
+		readeds = tempList.size();
+
+		downs = manager.queryDownsCount();
+		manager.closeDB();
+
+		manager = new DBManager(MyFragment.this.getActivity(),
+				DBUtil.CollectName, null, DBUtil.Code);
+		collects = manager.queryCollectCount();
+		manager.closeDB();
+
+		tv_rsl.setText("(" + readeds + ")");
+		tv_ssl.setText("(" + collects + ")");
+		tv_downs.setText("(" + downs + ")");
+	}
+
+	@Override
+	public void onClick(View v) {
+		Intent intent = null;
+
+		switch (v.getId()) {
+		case R.id.ll_my_return:
+			intent = new Intent(MyFragment.this.getActivity(),
+					PersonReturn.class);
+			MyFragment.this.getActivity().startActivity(intent);
+			break;
+		case R.id.ll_my_set:
+			intent = new Intent(MyFragment.this.getActivity(),
+					GeneralsettingActivity.class);
+			MyFragment.this.getActivity().startActivity(intent);
+			break;
+		case R.id.ll_my_login:
+			doAuthor();
+			break;
+		case R.id.ll_my_down:
+			intent = new Intent(MyFragment.this.getActivity(),
+					CollectActivity.class);
+			intent.putExtra("operate", "2");
+			MyFragment.this.getActivity().startActivity(intent);
+			break;
+		case R.id.ll_my_readed:
+			intent = new Intent(MyFragment.this.getActivity(),
+					CollectActivity.class);
+			intent.putExtra("operate", "1");
+			MyFragment.this.getActivity().startActivity(intent);
+			break;
+		case R.id.ll_my_collect:
+			intent = new Intent(MyFragment.this.getActivity(),
+					CollectActivity.class);
+			intent.putExtra("operate", "3");
+			MyFragment.this.getActivity().startActivity(intent);
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	@Override
+	public void updateDowns() {
+		manager = new DBManager(MyFragment.this.getActivity(), DBUtil.ReadName,
+				null, DBUtil.Code);
+		downs = manager.queryDownsCount();
+		tv_downs.setText("(" + downs + ")");
+		manager.closeDB();
+	}
+
+	@Override
+	public void updateReads() {
+		manager = new DBManager(MyFragment.this.getActivity(), DBUtil.ReadName,
+				null, DBUtil.Code);
+		List<ComicsDetail> list = manager.query();
+
+		List<ComicsDetail> tempList = new ArrayList<ComicsDetail>();
+
+		for (int i = 0; i < list.size(); i++) {
+			ComicsDetail comicsDetail = list.get(i);
+			if (comicsDetail.getmId() != null && comicsDetail.getmUrl() != null
+					&& comicsDetail.getmPic() != null) {
+				comicsDetail.setFlag(true);
+				tempList.add(comicsDetail);
+			}
+		}
+		readeds = tempList.size();
+		tv_rsl.setText("(" + readeds + ")");
+		manager.closeDB();
+	}
+
+	@Override
+	public void updateCollects() {
+		manager = new DBManager(MyFragment.this.getActivity(),
+				DBUtil.CollectName, null, DBUtil.Code);
+		collects = manager.queryCollectCount();
+		tv_ssl.setText("(" + collects + ")");
+		manager.closeDB();
+	}
+}

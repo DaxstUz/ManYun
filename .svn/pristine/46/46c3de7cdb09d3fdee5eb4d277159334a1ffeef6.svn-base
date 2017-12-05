@@ -1,0 +1,151 @@
+package com.ch.mhy.adapter;
+
+import java.util.List;
+
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.ch.mhy.R;
+import com.ch.mhy.activity.book.ReadingActivity;
+import com.ch.mhy.db.DBManager;
+import com.ch.mhy.db.DBUtil;
+import com.ch.mhy.entity.ComicsDetail;
+import com.ch.mhy.listener.UtilRead;
+import com.ch.mhy.util.Utils;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+
+public class BookReadedAdapter extends BaseAdapter {
+
+	private List<ComicsDetail> list;
+
+	private LayoutInflater inflater;
+
+	private Context content;
+
+	private UtilRead ur;
+	
+	public BookReadedAdapter(Context content, List<ComicsDetail> list,UtilRead ur) {
+		this.list = list;
+		inflater = LayoutInflater.from(content);
+		this.content = content;
+		this.ur=ur;
+	}
+
+	@Override
+	public int getCount() {
+		return list.size();
+	}
+
+	@Override
+	public Object getItem(int position) {
+		return list.get(position);
+	}
+
+	@Override
+	public long getItemId(int position) {
+		return position;
+	}
+
+	@Override
+	public View getView(final int position, View convertView, ViewGroup parent) {
+		String imgUrl = list.get(position).getmPic();
+		if(imgUrl!=null){
+			if(convertView!= null && imgUrl.equals(convertView.getTag())){
+				return convertView;
+			}
+		}
+		View view = inflater.inflate(R.layout.adapter__readed_item, null, false);
+		view.setTag(imgUrl);
+		ImageView iv_bookreaded = (ImageView) view.findViewById(R.id.iv_bookreaded);
+		iv_bookreaded.setBackgroundResource(0);
+		ImageLoader.getInstance().displayImage(
+				imgUrl, iv_bookreaded,Utils.options3,new ImageLoadingListener() {
+					
+					@Override
+					public void onLoadingStarted(String imageUri, View view) {
+						view.setBackgroundResource(R.drawable.ic_loading_small);
+					}
+					
+					@Override
+					public void onLoadingFailed(String imageUri, View view,
+							FailReason failReason) {
+					}
+					
+					@Override
+					public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+					}
+					
+					@Override
+					public void onLoadingCancelled(String imageUri, View view) {
+					}
+				});
+		
+		TextView tv_bookreaded_continue = (TextView) view
+				.findViewById(R.id.tv_bookreaded_continue);
+		
+		if (list.get(position).isFlag()) {
+			ImageView tv_bookreaded_del = (ImageView) view
+					.findViewById(R.id.tv_bookreaded_del);
+			tv_bookreaded_del.setVisibility(View.GONE);
+		}else{
+			tv_bookreaded_continue.setVisibility(View.GONE);
+			
+		}
+		
+		FrameLayout ll_df_del=(FrameLayout) view.findViewById(R.id.ll_df_del);
+		ll_df_del.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (list.get(position).isFlag()) {
+					Intent intent = new Intent(content, ReadingActivity.class);
+//					Utils.mh = list.get(position);
+					// 设置看到第几页
+					DBManager manager = new DBManager(content, DBUtil.ReadName,
+							null, DBUtil.Code);
+					manager.addOrUpdateComicDetail(list.get(position));
+					manager.closeDB();
+					
+					 intent.putExtra("mh", list.get(position));
+					intent.putExtra("comefrom", "1");
+					content.startActivity(intent);
+				}else{
+					ur.del(position);
+				}
+				
+			}
+		});
+		
+
+		TextView tv_bookreaded_reading = (TextView) view
+				.findViewById(R.id.tv_bookreaded_reading);
+		tv_bookreaded_reading.setText(list.get(position).getmName());
+
+		TextView tv_bookreaded_name = (TextView) view
+				.findViewById(R.id.tv_bookreaded_name);
+		tv_bookreaded_name.setText(list.get(position).getmTitle());
+
+		TextView tv_bookreaded_author = (TextView) view
+				.findViewById(R.id.tv_bookreaded_author);
+		tv_bookreaded_author.setText("作者："
+				+ list.get(position).getmDirector());
+
+		TextView tv_bookreaded_updateto = (TextView) view
+				.findViewById(R.id.tv_bookreaded_updateto);
+		tv_bookreaded_updateto.setText("更新到"
+				+ list.get(position).getmLianzai());
+			
+		return view;
+	}
+}

@@ -1,0 +1,106 @@
+package com.ch.mhy.fragment;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
+
+import com.ch.comm.resquest.AbsResponseData;
+import com.ch.mhy.R;
+import com.ch.mhy.activity.comment.CommentDataUtil;
+import com.ch.mhy.adapter.MsgAdapter;
+import com.ch.mhy.util.UrlConstant;
+import com.ch.mhy.util.UserUtil;
+import com.ch.mhy.util.Utils;
+
+/**
+ * 我发起的
+ * @author DaxstUz 2416738717
+ * 2015年10月17日
+ *
+ */
+public class ISayFragment  extends Fragment{
+	
+	/*列表*/
+	private ListView lv_isay;
+	private List<JSONObject> list=new ArrayList<JSONObject>();
+	private MsgAdapter madapter;
+	
+	private View view;
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreateView(inflater, container, savedInstanceState);
+		if(view!=null){
+			ViewGroup parent=(ViewGroup) view.getParent();
+			if(parent!=null){
+				parent.removeView(view);
+			}
+			return view;
+		}else{
+//			for (int i = 0; i < 5; i++) {
+//				list.add(new JSONObject());
+//			}
+			view=inflater.inflate(R.layout.fragment_isay, null);
+		}
+		
+		init();
+		getData();
+		return view;
+	}
+
+	
+	private int currentPage=1;
+	
+	/**
+	 * 获取用户数据
+	 */
+	private void getData() {
+		
+		
+JSONObject param=new JSONObject();
+		
+		HashMap<String, String> map=new HashMap<String, String>();
+		
+		
+		try {
+			map.put("userId", UserUtil.getOpenId(getActivity())+"");
+			map.put("userType", UserUtil.getPlatForm(getActivity())+"");
+			map.put("nickname", UserUtil.getScreen_name(getActivity()));
+			map.put("imgUrl", UserUtil.getHeadurl(getActivity()));
+			
+			param.put("pageSize",Utils.PageSize);
+			param.put("currentPage",currentPage);
+			param.put("object", new JSONObject(map));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		CommentDataUtil.getTopicList(getActivity(), UrlConstant.UrlCommentsByUser, param, new  AbsResponseData(null) {
+			@Override
+			public void dataBusi(Object data) {
+				list.addAll((List<JSONObject>)data);
+				madapter.notifyDataSetChanged();
+			}
+		});
+	}
+
+	/**
+	 * 初始化控件
+	 */
+	private void init() {
+		madapter=new MsgAdapter(getActivity(), list);
+		lv_isay=(ListView) view.findViewById(R.id.lv_isay);
+		lv_isay.setAdapter(madapter);
+	}
+}

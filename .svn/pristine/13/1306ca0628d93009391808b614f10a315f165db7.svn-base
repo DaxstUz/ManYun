@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/ll_search_main"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#000000" >
+
+            <LinearLayout
+                android:id="@+id/btn_search_back"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.8"
+                android:gravity="center"
+                android:onClick="onclick" >
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ch_back"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_aboutmy_title_bg"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="5.6"
+                android:background="@drawable/ch_searchtitle_bg"
+                android:gravity="center_vertical" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/searchm" />
+
+                <EditText
+                    android:id="@+id/et_search_key"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00ffffff"
+                    android:hint="请输入漫画名或作者"
+                    android:imeOptions="actionSearch"
+                    android:maxLength="60"
+                    android:singleLine="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="#FFFFFF"
+                    android:textCursorDrawable="@null" />
+
+                <ImageView
+                    android:id="@+id/iv_searchcanser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
+                    android:background="@drawable/img_cancel"
+                    android:onClick="onclick"
+                    android:padding="10dp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_my_edit"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.8"
+                android:gravity="center"
+                android:onClick="onclick" >
+
+                <TextView
+                    android:id="@+id/btn_search_go"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="onclick"
+                    android:text="@string/search"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- 编辑区 -->
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:text="最近搜索"
+                android:gravity="center_vertical"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#000000" />
+
+            <LinearLayout
+                android:id="@+id/btn_search_edit"
+                android:layout_width="60dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="right|center_vertical"
+                android:gravity="center_vertical|right"
+                android:onClick="onclick" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/downdeletehui" />
+            </LinearLayout>
+            
+            <TextView 
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#ecd7d7"
+                android:layout_gravity="bottom"
+                 android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+                />
+        </FrameLayout>
+
+        <ListView
+            android:id="@+id/lv_keylist"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="10" >
+        </ListView>
+    </LinearLayout>
+
+</FrameLayout>

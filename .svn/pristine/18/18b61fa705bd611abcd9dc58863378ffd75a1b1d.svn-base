@@ -1,0 +1,44 @@
+package com.ch.comm.saevent;
+
+import java.util.HashMap;
+
+import android.content.Context;
+
+/**
+ * 统计事件
+ * @author xc.li
+ * @date 2015-9-14
+ */
+public class MobSaAgent {
+
+	/**
+	 * 点击事件
+	 * @param context
+	 * @param eventId
+	 */
+	public static void onEvent(Context context, String eventId){
+		
+	}
+
+	/**
+	 * 统计事件
+	 * @param context
+	 * @param eventId
+	 * @param map
+	 */
+	public static void onEvent(Context context, String eventId, HashMap<String, String> map){
+		
+	}
+	
+	/**
+	 * 统计事件
+	 * @param context
+	 * @param eventId
+	 * @param map
+	 * @param value
+	 */
+	public static void onEventValue(Context context, String eventId, HashMap<String, String> map, double value){
+		
+	}
+
+}

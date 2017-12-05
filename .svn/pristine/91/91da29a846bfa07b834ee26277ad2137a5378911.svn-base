@@ -1,0 +1,123 @@
+package com.ch.comm.netty;
+
+import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
+import io.netty.channel.ChannelPipeline;
+import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
+import io.netty.handler.codec.LengthFieldPrepender;
+import io.netty.handler.codec.string.StringDecoder;
+import io.netty.handler.codec.string.StringEncoder;
+import io.netty.util.CharsetUtil;
+import android.os.Handler;
+
+/**
+ * 消息请求客户端
+ * @author xc.li
+ * @date 2015-8-31
+ */
+public class NettyTcpMessager {
+	private static final String HOST = "192.168.1.249";
+	private static final int PORT = 7878;
+	private Handler handler;
+	private Bootstrap bootstrap;
+	private NioEventLoopGroup group;
+	private Channel channel;
+
+	public NettyTcpMessager(Handler handler) {
+		this.handler = handler;
+	}
+
+	/**
+	 * 连接到Socket服务端
+	 * @param msg
+	 */
+	public void connect(String msg) {
+		bootstrap = getBootstrap();
+		channel = getChannel(bootstrap, HOST, PORT);
+		try {
+			sendMsg(msg);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 重新连接到Socket服务端
+	 * @param msg
+	 */
+	public void reConnect(String msg) {
+		channel = getChannel(bootstrap, HOST, PORT);
+		try {
+			sendMsg(msg);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 初始化Bootstrap
+	 * @return
+	 */
+	private Bootstrap getBootstrap() {
+		group = new NioEventLoopGroup();
+		Bootstrap b = new Bootstrap();
+		b.group(group).channel(NioSocketChannel.class);
+		b.handler(new ChannelInitializer<Channel>() {
+			@Override
+			protected void initChannel(Channel ch) throws Exception {
+				ChannelPipeline pipeline = ch.pipeline();
+				pipeline.addLast("frameDecoder",
+						new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 4, 0, 4));
+				pipeline.addLast("frameEncoder", new LengthFieldPrepender(4));
+				pipeline.addLast("decoder", new StringDecoder(CharsetUtil.UTF_8));
+				pipeline.addLast("encoder", new StringEncoder(CharsetUtil.UTF_8));
+				pipeline.addLast("handler", new TcpClientHandler(handler));
+			}
+		});
+		b.option(ChannelOption.SO_KEEPALIVE, true);
+		return b;
+	}
+
+	/**
+	 * 初始化Channel
+	 * @param bootstrap
+	 * @param host
+	 * @param port
+	 * @return
+	 */
+	private Channel getChannel(Bootstrap bootstrap, String host, int port) {
+		Channel channel = null;
+		try {
+			channel = bootstrap.connect(host, port).sync().channel();
+		} catch (Exception e) {
+			return null;
+		}
+		return channel;
+	}
+
+	/**
+	 * 发送请求消息
+	 * @param msg
+	 * @throws Exception
+	 */
+	public void sendMsg(String msg) throws Exception {
+		if (channel != null) {
+			channel.writeAndFlush(msg).sync();
+		} else {
+		}
+	}
+	
+	/**
+	 * 销毁LoopGroup
+	 */
+	public void destory(){
+		if(group!=null){
+			group.shutdownGracefully();
+		}
+	}
+	
+}

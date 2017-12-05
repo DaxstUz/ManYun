@@ -1,0 +1,41 @@
+package com.ch.mhy.db;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteDatabase.CursorFactory;
+import android.database.sqlite.SQLiteOpenHelper;
+
+public class DBHelper extends SQLiteOpenHelper {
+
+    public DBHelper(Context context, String name, CursorFactory factory,
+                    int version) {
+        super(context, name, factory, version);
+    }
+
+    //数据库第一次被创建时onCreate会被调用
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+    	db.execSQL("CREATE TABLE IF NOT EXISTS comic" +
+    			"(id INTEGER PRIMARY KEY AUTOINCREMENT,mQid INTEGER,mId INTEGER,mName VARCHAR, mUrl TEXT,mNo INTEGER,CreateTime TEXT,mTitle VARCHAR,mDirector VARCHAR,mPic TEXT, mTotal INTEGER,mLianzai VARCHAR,rIndex INTEGER,maxNo INTEGER,mContent VARCHAR,mType1 INTEGER,mFenAll INTEGER,localUrl TEXT,port VARCHAR,ReadTime VARCHAR,minNo INTEGER )");
+    	db.execSQL("CREATE TABLE IF NOT EXISTS down" +
+    			"(id INTEGER PRIMARY KEY AUTOINCREMENT,mQid INTEGER,mId INTEGER,mName VARCHAR, mUrl TEXT,mNo INTEGER,CreateTime TEXT,mTitle VARCHAR,mDirector VARCHAR,mPic TEXT, mTotal INTEGER,mLianzai VARCHAR,rIndex INTEGER,maxNo INTEGER,isdown INTEGER,downs INTEGER,mType1 INTEGER,mContent VARCHAR,mFenAll INTEGER,localUrl TEXT,port VARCHAR,ReadTime VARCHAR,minNo INTEGER)");
+    }
+
+    //如果DATABASE_VERSION值被改为2,系统发现现有数据库版本不同,即会调用onUpgrade
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    	
+    	/*防止不同的版本号里面的数据结构不同，先删除原来的表结构*/
+    	db.execSQL("DROP TABLE IF EXISTS comic");
+    	db.execSQL("DROP TABLE IF EXISTS down");
+    	db.execSQL("CREATE TABLE IF NOT EXISTS comic" +
+    			"(id INTEGER PRIMARY KEY AUTOINCREMENT,mQid INTEGER,mId INTEGER,mName VARCHAR, mUrl TEXT,mNo INTEGER,CreateTime TEXT,mTitle VARCHAR,mDirector VARCHAR,mPic TEXT, mTotal INTEGER,mLianzai VARCHAR,rIndex INTEGER,maxNo INTEGER,mContent VARCHAR,mType1 INTEGER,mFenAll INTEGER,localUrl TEXT,port VARCHAR,ReadTime VARCHAR,minNo INTEGER )");
+    	db.execSQL("CREATE TABLE IF NOT EXISTS down" +
+    			"(id INTEGER PRIMARY KEY AUTOINCREMENT,mQid INTEGER,mId INTEGER,mName VARCHAR, mUrl TEXT,mNo INTEGER,CreateTime TEXT,mTitle VARCHAR,mDirector VARCHAR,mPic TEXT, mTotal INTEGER,mLianzai VARCHAR,rIndex INTEGER,maxNo INTEGER,isdown INTEGER,downs INTEGER,mType1 INTEGER,mContent VARCHAR,mFenAll INTEGER,localUrl TEXT,port VARCHAR,ReadTime VARCHAR,minNo INTEGER)");
+    }
+
+
+}
+
+
+

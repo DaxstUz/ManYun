@@ -1,0 +1,65 @@
+package com.ch.mhy.adapter;
+
+import java.util.List;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.text.Html;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.ch.mhy.R;
+import com.ch.mhy.entity.CommentReplyInfo;
+import com.ch.mhy.util.Utils;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
+public class CommentReplyAdapter extends BaseAdapter {
+	private List<CommentReplyInfo> dataList;
+	private LayoutInflater inflater;
+	 
+	public CommentReplyAdapter(Context context, List<CommentReplyInfo> dataList){
+		this.dataList = dataList;
+		this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	}
+	
+	@Override
+	public int getCount() {
+		return dataList.size();
+	}
+
+	@Override
+	public Object getItem(int position) {
+		return dataList.get(position);
+	}
+
+	@Override
+	public long getItemId(int position) {
+		return 0;
+	}
+
+	@SuppressLint({ "ViewHolder", "SimpleDateFormat" })
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		convertView = inflater.inflate(R.layout.comment_reply_item, null, false);
+		CommentReplyInfo bean = dataList.get(position);
+		ImageView user_head = (ImageView)convertView.findViewById(R.id.comment_reply_head);
+		TextView user_name = (TextView)convertView.findViewById(R.id.comment_reply_name);
+		TextView user_date = (TextView)convertView.findViewById(R.id.comment_reply_date);
+		TextView user_comment = (TextView)convertView.findViewById(R.id.comment_reply_content);
+		
+		String headUrl = bean.getImgUrl();
+		
+		ImageLoader.getInstance().displayImage(headUrl, user_head, Utils.adapterOpt);
+		user_name.setText(Html.fromHtml("<B>"+bean.getNickname()+"</B>"));
+		/*SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String date = formatter.format(bean.getCreateTime());*/
+		user_date.setText(bean.getReplyTime());
+		user_comment.setText(bean.getDiscuss());
+		return convertView;
+	}
+
+}

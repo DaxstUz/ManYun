@@ -1,0 +1,192 @@
+package com.ch.mhy.fragment;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request.Method;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.ch.mhy.R;
+import com.ch.mhy.activity.book.ShowDetailActivity;
+import com.ch.mhy.adapter.BookCollectAdapter;
+import com.ch.mhy.db.DBManager;
+import com.ch.mhy.db.DBUtil;
+import com.ch.mhy.entity.Comics;
+import com.ch.mhy.entity.ComicsDetail;
+import com.ch.mhy.util.NetUtil;
+import com.ch.mhy.util.UrlConstant;
+import com.ch.mhy.util.Utils;
+
+/**
+ * 我的收藏
+ *
+ * @author DaxstUz 2416738717 2015年5月6日
+ */
+public class CollectFragment extends Fragment {
+
+	private DBManager manager;
+
+	private ListView lv_book_collect;
+
+	private List<ComicsDetail> list = new ArrayList<ComicsDetail>();
+
+	private BookCollectAdapter adapter;
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+
+		View view = inflater.inflate(R.layout.fragment_collect, null);
+		lv_book_collect = (ListView) view.findViewById(R.id.lv_book_collect);
+		adapter = new BookCollectAdapter(CollectFragment.this.getActivity(),
+				list);
+		lv_book_collect.setAdapter(adapter);
+
+		getData();
+		return view;
+	}
+
+	/**
+	 * 获取数据
+	 */
+	private void getData() {
+		manager = new DBManager(CollectFragment.this.getActivity(),
+				DBUtil.CollectName, null, DBUtil.Code);
+		list.clear();
+		list.addAll(manager.query());
+
+		for (ComicsDetail comicsDetail : list) {
+			// 设置flag 是否显示删除按钮i
+			comicsDetail.setFlag(true);
+		}
+		adapter.notifyDataSetChanged();
+
+		lv_book_collect.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				ComicsDetail cd = list.get(position);
+				if (cd.isFlag()) {
+					Comics comic = new Comics();
+					comic.setmPic(cd.getmPic());
+					comic.setmQid(Long.valueOf(cd.getmId().toString()));
+					comic.setmFenAll(cd.getmFenAll());
+					comic.setmType1(cd.getmType1());
+					comic.setmContent(cd.getmContent());
+					comic.setmLianzai(cd.getmLianzai());
+					comic.setmDirector(cd.getmDirector());
+					comic.setmTitle(cd.getmTitle());
+					Intent intent = new Intent(CollectFragment.this
+							.getActivity(), ShowDetailActivity.class);
+					intent.putExtra("manhua", comic);
+					intent.putExtra("eventId", "my_book_click");
+					CollectFragment.this.getActivity().startActivity(intent);
+
+				} else {
+					delToServer(cd.getmId() + "");
+					manager = new DBManager(CollectFragment.this.getActivity(),
+							DBUtil.CollectName, null, DBUtil.Code);
+					manager.delete(cd);
+					manager.closeDB();
+					list.remove(position);
+					adapter = new BookCollectAdapter(CollectFragment.this
+							.getActivity(), list);
+					lv_book_collect.setAdapter(adapter);
+					if (list != null && list.size() == 0) {
+						Utils.updateEditFlag.update("collect");
+					}
+
+					if (Utils.updateCollectInfo != null) {
+						Utils.updateCollectInfo.updateCollects();
+					}
+				}
+			}
+		});
+	}
+
+	/**
+	 * 将阅读的漫画数据进行处理
+	 */
+	private void delToServer(String mid) {
+		// TODO Auto-generated method stub
+		/**
+		 * 需要插入的记录
+		 */
+		Map<String, String> obj = new HashMap<String, String>();
+		obj.put("comicId", mid);
+		obj.put("userId", "E1685B32D9E941FD5E97395472766708");
+		// obj.put("chapterId", mh.getmQid() + "");
+		// obj.put("pageNum", ch_read_view.mImageIndex + "");
+		JSONObject jobObject = new JSONObject();
+		try {
+			jobObject.put("object", new JSONObject(obj));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		JsonObjectRequest jsonrRequest = new JsonObjectRequest(Method.POST,
+				UrlConstant.delCollectToServer, jobObject,
+				new Listener<JSONObject>() {
+					@Override
+					public void onResponse(JSONObject response) {
+						// TODO Auto-generated method stub
+					}
+				}, new ErrorListener() {
+
+					@Override
+					public void onErrorResponse(VolleyError error) {
+						// TODO Auto-generated method stub
+
+					}
+				}) {
+
+			@Override
+			public Map<String, String> getHeaders() throws AuthFailureError {
+				Map<String, String> map1 = new HashMap<String, String>();
+				map1.put("Content-Type", "application/json; charset=utf-8");
+				return map1;
+			}
+		};
+
+		jsonrRequest.setRetryPolicy(new DefaultRetryPolicy(6000,
+				DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+				DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+		NetUtil.rqueue.add(jsonrRequest);
+	}
+
+	public void updateStatus(boolean flag) {
+
+		int n = 0;
+		for (ComicsDetail comicsDetail : list) {
+			comicsDetail.setFlag(flag);
+		}
+
+		if (CollectFragment.this.getActivity() != null) {
+			adapter = new BookCollectAdapter(
+					CollectFragment.this.getActivity(), list);
+			lv_book_collect.setAdapter(adapter);
+		}
+
+	}
+}

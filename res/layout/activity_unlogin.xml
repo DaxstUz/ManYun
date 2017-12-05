@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#dbdbdb"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#000000" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.8"
+            android:gravity="center" >
+
+            <Button
+                android:id="@+id/btn_return_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/ch_back"
+                android:gravity="center"
+                android:onClick="onclick" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_aboutmy_title_bg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="5.6"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/btn_my_readed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="个人资料"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_my_showhistory"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.8"
+            android:gravity="center"
+            android:onClick="onclick" >
+
+            <!-- 更改历史按钮的图标 -->
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/history"
+                android:gravity="center"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:layout_margin="20dp"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center" >
+
+            <com.ch.mhy.widget.CircleImageView
+                android:id="@+id/iv_show_head"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:src="@drawable/ch_my_head" />
+        </LinearLayout>
+        
+        <LinearLayout 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            >
+            <TextView android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="昵称"/>
+            <TextView
+                android:id="@+id/tv_nickname_canser"
+                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                />
+        </LinearLayout>
+        
+        <TextView 
+            android:layout_marginTop="10dp"
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:background="#e0868a97"
+            />
+        <LinearLayout 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            >
+            <TextView android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="第三方平台"/>
+            <TextView
+                 android:id="@+id/tv_platfrom_canser" 
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                />
+        </LinearLayout>
+        
+         <TextView 
+            android:layout_marginTop="10dp"
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:background="#e0868a97"
+            />
+         
+        <LinearLayout 
+            android:id="@+id/ll_unlogin"
+            android:onClick="onclick"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            >
+             <TextView android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:background="@drawable/login_shapes"
+                android:text="退出当前账号"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
